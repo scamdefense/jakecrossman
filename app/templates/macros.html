@@ -1,0 +1,43 @@
+{% macro smart_image(image_name, alt_text, class="", style="", loading="lazy", formats=None) %}
+{%- set img_data = smart_img(image_name, formats) -%}
+{%- if img_data.formats %}
+<picture class="smart-picture {{ class }}">
+    {%- if img_data.has_webp %}
+    <source srcset="{{ img_data.formats.webp }}" type="image/webp">
+    {%- endif %}
+    {%- if img_data.has_jpg %}
+    <source srcset="{{ img_data.formats.jpg or img_data.formats.jpeg }}" type="image/jpeg">
+    {%- endif %}
+    {%- if img_data.has_png %}
+    <source srcset="{{ img_data.formats.png }}" type="image/png">
+    {%- endif %}
+    <img 
+        src="{{ img_data.fallback }}" 
+        alt="{{ alt_text }}" 
+        loading="{{ loading }}"
+        {% if style %}style="{{ style }}"{% endif %}
+        {% if class %}class="{{ class }}"{% endif %}
+    >
+</picture>
+{%- else %}
+<!-- Fallback for missing image -->
+<div class="gallery-placeholder {{ class }}" {% if style %}style="{{ style }}"{% endif %}>
+    <div style="text-align: center; color: #cccccc;">
+        <i class="fas fa-image" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
+        <p style="margin: 0; font-size: 0.9rem;">{{ alt_text }}</p>
+    </div>
+</div>
+{%- endif %}
+{% endmacro %}
+
+{% macro gallery_image(image_name, alt_text, class="gallery-item", loading="lazy") %}
+<div class="{{ class }}">
+    {{ smart_image(image_name, alt_text, style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;", loading=loading) }}
+</div>
+{% endmacro %}
+
+{% macro highlight_image(image_name, alt_text, class="highlight-image") %}
+<div class="{{ class }}">
+    {{ smart_image(image_name, alt_text, loading="lazy") }}
+</div>
+{% endmacro %}

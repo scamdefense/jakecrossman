@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "macros.html" import smart_image, gallery_image, highlight_image %}
 
 {% block content %}
 <!-- Gallery Hero -->
@@ -14,221 +15,18 @@
     <div class="container">
         <h2 style="color: #ffd700; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem;">
             <i class="fas fa-camera-retro"></i> Professional Headshots
-        </h2>
-          <div class="gallery-grid">
+        </h2>          <div class="gallery-grid">
             <!-- Professional Headshots -->
-            <div class="gallery-item">
-                <img src="{{ url_for('static', filename='images/headshot-1.jpg') }}" 
-                     alt="Jake Crossman Professional Headshot 1" 
-                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-            </div>
-            
-            <div class="gallery-item">
-                <img src="{{ url_for('static', filename='images/headshot-2.jpg') }}" 
-                     alt="Jake Crossman Professional Headshot 2" 
-                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-            </div>
-            
-            <div class="gallery-item">
-                <img src="{{ url_for('static', filename='images/headshot-3.jpg') }}" 
-                     alt="Jake Crossman Professional Headshot 3" 
-                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-            </div>
-            
-            <div class="gallery-item">
-                <img src="{{ url_for('static', filename='images/headshot-4.jpg') }}" 
-                     alt="Jake Crossman Professional Headshot 4" 
-                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-            </div>
-            
-            <div class="gallery-item">
-                <img src="{{ url_for('static', filename='images/headshot-5.jpg') }}" 
-                     alt="Jake Crossman Professional Headshot 5" 
-                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-            </div>
-            
-            <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <div style="text-align: center; color: #cccccc;">
-                        <i class="fas fa-user" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
-                        <p style="margin: 0; font-size: 0.9rem;">Headshot 6</p>
-                    </div>
-                </div>
-            </div>
+            {{ gallery_image('headshot-1', 'Jake Crossman Professional Headshot 1') }}
+            {{ gallery_image('headshot-2', 'Jake Crossman Professional Headshot 2') }}
+            {{ gallery_image('headshot-3', 'Jake Crossman Professional Headshot 3') }}
+            {{ gallery_image('headshot-4', 'Jake Crossman Professional Headshot 4') }}
+            {{ gallery_image('headshot-5', 'Jake Crossman Professional Headshot 5') }}
+            {{ gallery_image('headshot-6', 'Jake Crossman Professional Headshot 6') }}
+            {{ gallery_image('headshot-7', 'Jake Crossman Professional Headshot 7') }}
+            {{ gallery_image('headshot-8', 'Jake Crossman Professional Headshot 8') }}
         </div>
     </div>
 </section>
 
-<!-- Production Stills Section -->
-<section class="gallery-section" style="background: rgba(255, 255, 255, 0.02); padding: 4rem 0; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-    <div class="container">
-        <h2 style="color: #ffd700; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="fas fa-film"></i> Production Stills
-        </h2>
-        
-        <div class="gallery-grid">
-            <!-- ESPN+ Fuse Stills -->
-            <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <div style="text-align: center; color: #cccccc;">
-                        <i class="fas fa-tv" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
-                        <p style="margin: 0; font-size: 0.9rem;">ESPN+ Fuse<br>Studio Set</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <div style="text-align: center; color: #cccccc;">
-                        <i class="fas fa-tv" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
-                        <p style="margin: 0; font-size: 0.9rem;">ESPN+ Fuse<br>Live Segment</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Continue to Win Stills -->
-            <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <div style="text-align: center; color: #cccccc;">
-                        <i class="fas fa-film" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
-                        <p style="margin: 0; font-size: 0.9rem;">Continue to Win<br>Football Scene</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <div style="text-align: center; color: #cccccc;">
-                        <i class="fas fa-film" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
-                        <p style="margin: 0; font-size: 0.9rem;">Continue to Win<br>Character Close-up</p>
-                    </div>
-                </div>
-            </div>
-              <!-- After Curfew Stills -->
-            <div class="gallery-item">
-                <img src="{{ url_for('static', filename='images/after-curfew-still.jpg') }}" 
-                     alt="Jake Crossman in After Curfew - Papa Gaines" 
-                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-            </div>
-            
-            <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <div style="text-align: center; color: #cccccc;">
-                        <i class="fas fa-theater-masks" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
-                        <p style="margin: 0; font-size: 0.9rem;">After Curfew<br>Sketch Comedy</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Theater Stills -->
-            <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <div style="text-align: center; color: #cccccc;">
-                        <i class="fas fa-mask" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
-                        <p style="margin: 0; font-size: 0.9rem;">Oliver Twist<br>Fagin Role</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <div style="text-align: center; color: #cccccc;">
-                        <i class="fas fa-mask" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
-                        <p style="margin: 0; font-size: 0.9rem;">Canterbury Tales<br>Chaucer</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Behind-the-Scenes Section -->
-<section class="gallery-section">
-    <div class="container">
-        <h2 style="color: #ffd700; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="fas fa-camera"></i> Behind the Scenes
-        </h2>
-        
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <div style="text-align: center; color: #cccccc;">
-                        <i class="fas fa-coffee" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
-                        <p style="margin: 0; font-size: 0.9rem;">Set Life<br>Between Takes</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <div style="text-align: center; color: #cccccc;">
-                        <i class="fas fa-users" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
-                        <p style="margin: 0; font-size: 0.9rem;">Cast & Crew<br>Team Photo</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <div style="text-align: center; color: #cccccc;">
-                        <i class="fas fa-clapperboard" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
-                        <p style="margin: 0; font-size: 0.9rem;">Director's Cut<br>Working Session</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-item">
-                <div class="gallery-placeholder">
-                    <div style="text-align: center; color: #cccccc;">
-                        <i class="fas fa-mobile-alt" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
-                        <p style="margin: 0; font-size: 0.9rem;">Content Creation<br>TikTok Setup</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Image Replacement Instructions -->
-<section class="section" style="background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 12px; margin: 2rem auto; max-width: 800px;">
-    <div class="container">
-        <div style="text-align: center; padding: 2rem;">
-            <h3 style="color: #ffd700; margin-bottom: 1rem;">
-                <i class="fas fa-info-circle"></i> Image Implementation Guide
-            </h3>
-            <p style="color: #cccccc; margin-bottom: 1.5rem;">To add your professional photos, replace the placeholder divs with actual image elements:</p>
-            
-            <div style="background: rgba(0, 0, 0, 0.5); padding: 1.5rem; border-radius: 8px; text-align: left; font-family: 'Courier New', monospace; font-size: 0.9rem; color: #ffffff; overflow-x: auto;">
-                <pre style="margin: 0; white-space: pre-wrap;">
-&lt;div class="gallery-item"&gt;
-    &lt;img src="{{ url_for('static', filename='images/headshot-1.jpg') }}" 
-         alt="Jake Crossman Professional Headshot" 
-         style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"&gt;
-&lt;/div&gt;</pre>
-            </div>
-            
-            <p style="color: #999999; margin-top: 1rem; font-size: 0.9rem;">
-                Place images in <code>/app/static/images/</code> directory and update the src paths accordingly.
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- Gallery CTA -->
-<section class="section">
-    <div class="container">
-        <div class="text-center">
-            <h2>Want to See More?</h2>
-            <p class="mb-3">Interested in additional portfolio pieces or have a specific project inquiry?</p>
-            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                <a href="{{ url_for('main.contact') }}" class="btn btn-primary">
-                    <i class="fas fa-envelope"></i> Request Portfolio
-                </a>
-                <a href="{{ url_for('main.reel') }}" class="btn btn-secondary">
-                    <i class="fas fa-play"></i> Watch Demo Reel
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
 {% endblock %}

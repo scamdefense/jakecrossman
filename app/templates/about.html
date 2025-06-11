@@ -1,21 +1,19 @@
 {% extends "base.html" %}
+{% from "macros.html" import smart_image, gallery_image, highlight_image %}
 
 {% block content %}
 <!-- About Hero Section -->
 <section class="about-hero">
     <div class="container">
         <div class="about-content">            <div class="headshot-container">
-                <img src="{{ url_for('static', filename='images/headshot-1.jpg') }}" 
-                     alt="Jake Crossman Professional Headshot" 
-                     class="headshot"
-                     style="width: 100%; max-width: 400px; height: auto; border-radius: 12px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); border: 3px solid rgba(255, 215, 0, 0.3);">
+                {{ smart_image('headshot-1', 'Jake Crossman Professional Headshot', class='headshot', style='width: 100%; max-width: 400px; height: auto; border-radius: 12px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); border: 3px solid rgba(255, 215, 0, 0.3);') }}
             </div>
             
             <div class="bio-text">
                 <h2>Jacob "Jake"Crossman</h2>
-                <p>Jacob "Jake" Crossman is an actor and digital creator splitting time between Los Angeles and his home state of Virginia. A natural athlete with strong comedic instincts, Jake first made his mark on ESPN+'s sports-comedy series <em>Fuse</em> and most recently headlined the indie pilot <em>Continue to Win</em>.</p>
+                <p>Jacob "Jake" Crossman is an actor and digital creator splitting time between Los Angeles and his quiet state of Virginia. A natural athlete with strong comedic instincts, Jake first made his mark on ESPN+'s sports-comedy series <em>FUSE</em> and most recently was featured in the indie pilot <em>Continue to Win</em> directed by Lester Speight.</p>
                 
-                <p>Trained in classical theatre—originating Fagin in <em>Oliver Twist</em> at Erie's Warner Theater—he combines physicality, improvisation chops, and a magnetic presence to bring characters vividly to life. Off-camera, he leverages over 1 million TikTok followers to craft brand-driven health and wellness content with 250 million+ views.</p>
+                <p>Trained in classical theatre and featured as Chaucer in <em>The Canturbury Tales</em> and Fagin in <em>Oliver Twist</em> at Erie's Theater, he combines physicality, improvisation chops, and a magnetic presence to bring characters vividly to life. Off-camera, he leverages over 1 million TikTok followers to craft brand-driven health and wellness content with 250 million+ views.</p>
                 
                 <p>Jake's versatility spans from dramatic lead roles to sketch comedy, showcasing his range and dedication to the craft. His athletic background provides a unique physicality to his performances, while his digital media experience brings a contemporary edge to traditional acting.</p>
             </div>
@@ -30,10 +28,26 @@
         
         <div class="skills-grid">
             <div class="skill-category">
-                <h4><i class="fas fa-graduation-cap"></i> Training & Education</h4>
+                <h4><i class="fas fa-graduation-cap"></i> Education & Training</h4>
                 <ul>
-                    <li>BFA Acting, Erie Community College (2015)</li>
-                    <li>Improvisation, Second City Conservatory (2019)</li>
+                    <li>B.S. Digital Media (Video Production), Gannon University & Liberty University (2019)</li>
+                    <li>Erie First Christian Academy Graduate (2016)</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category">
+                <h4><i class="fas fa-video"></i> Professional Media Training</h4>
+                <ul>
+                    <li>ESPN Director Training (2019)</li>
+                    <li>FOX Sports Crew Training (2019)</li>
+                    <li>FOX Sports Super Bowl Training (2020)</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category">
+                <h4><i class="fas fa-certificate"></i> Specialized Certifications</h4>
+                <ul>
+                    <li>NASM Certified Nutritionist (2022, 2024)</li>
                 </ul>
             </div>
             
@@ -41,6 +55,9 @@
                 <h4><i class="fas fa-trophy"></i> Awards & Honors</h4>
                 <ul>
                     <li>Erie Community Theater "Best Lead Actor" (2017)</li>
+                    <li>Contributed to 7 Daytime Emmy Award-winning production "GameOn"</li>
+                    <li>Crew Manager for Emmy Award-winning Super Bowl LIV broadcast on FOX</li>
+                    <li>Lynchburg Film Festival Recognition for "After Curfew"</li>
                 </ul>
             </div>
             
@@ -93,25 +110,20 @@
                     <li>Social Media Strategy</li>
                 </ul>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Call to Action -->
-<section class="section">
-    <div class="container">
-        <div class="text-center">
-            <h2>Ready to Work Together?</h2>
-            <p class="mb-3">Interested in collaborating or have a project in mind? Let's connect and bring your vision to life.</p>
-            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                <a href="{{ url_for('main.contact') }}" class="btn btn-primary">
-                    <i class="fas fa-envelope"></i> Get In Touch
-                </a>
-                <a href="{{ url_for('main.reel') }}" class="btn btn-secondary">
-                    <i class="fas fa-play"></i> View Demo Reel
-                </a>
+            
+            <div class="skill-category">
+                <h4><i class="fas fa-hashtag"></i> Digital & Social Media</h4>
+                <ul>
+                    <li>1M+ TikTok Followers</li>
+                    <li>250M+ Content Views</li>
+                    <li>Brand Partnership Creation</li>
+                    <li>Health & Wellness Content</li>
+                    <li>Video Editing & Production</li>
+                    <li>Multi-Platform Strategy</li>
+                </ul>
             </div>
         </div>
     </div>
 </section>
+
 {% endblock %}

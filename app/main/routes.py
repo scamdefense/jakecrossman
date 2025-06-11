@@ -123,3 +123,47 @@ def serve_video(filename):
             },
         )
         return response
+
+
+def smart_image_url(image_name, formats=None):
+    """
+    Generate URLs for multiple image formats with fallback support.
+
+    Args:
+        image_name: Base name of the image (without extension)
+        ['webp', 'jpg', 'jpeg', 'png']
+
+    Returns:
+        Dictionary with available format URLs and fallback URL
+    """
+    if formats is None:
+        formats = ["webp", "jpg", "jpeg", "png"]
+
+    image_dir = os.path.join(current_app.static_folder, "images")
+    available_formats = {}
+    fallback_url = None
+
+    for format_ext in formats:
+        file_path = os.path.join(image_dir, f"{image_name}.{format_ext}")
+        if os.path.exists(file_path):
+            from flask import url_for
+
+            url = url_for("static", filename=f"images/{image_name}.{format_ext}")
+            available_formats[format_ext] = url
+            if fallback_url is None or format_ext in ["jpg", "jpeg", "png"]:
+                fallback_url = url
+
+    return {
+        "formats": available_formats,
+        "fallback": fallback_url,
+        "has_webp": "webp" in available_formats,
+        "has_jpg": any(fmt in available_formats for fmt in ["jpg", "jpeg"]),
+        "has_png": "png" in available_formats,
+    }
+
+
+# Make the function available in templates
+@bp.app_template_global()
+def smart_img(image_name, formats=None):
+    """Template function for smart image handling"""
+    return smart_image_url(image_name, formats)

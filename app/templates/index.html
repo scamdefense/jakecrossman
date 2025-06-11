@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "macros.html" import smart_image, gallery_image, highlight_image %}
 
 {% block content %}
 <!-- Hero Section -->
@@ -28,16 +29,22 @@
 <!-- Demo Reel Preview Section -->
 <section class="section demo-reel">
     <div class="container">
-        <h2 class="section-title">Demo Reel Preview</h2>        <div class="video-container">
-            <video controls preload="metadata" poster="{{ url_for('static', filename='images/demo-reel-thumbnail.jpg') }}" 
+        <h2 class="section-title">Demo Reel Preview</h2>        <div class="video-container" id="video-container-index">
+            <video controls preload="auto" poster="{{ smart_img('demo-reel-thumbnail').fallback }}" 
                    style="width: 100%; height: 100%; border-radius: 12px;" 
-                   controlslist="nodownload">
+                   controlslist="nodownload"
+                   id="demo-video-index">
                 <source src="{{ url_for('main.serve_video', filename='demo-reel.mp4') }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+            <div class="video-play-overlay" id="play-overlay-index">
+                <div class="video-play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
         </div>
         
-        <p class="video-caption">A selection of my best on-camera work: comedy, drama & sketch.</p>
+        <p class="video-caption">"For me, acting is when stories and imagination become real." - Jake Crossman</p>
     </div>
 </section>
 
@@ -45,30 +52,35 @@
 <section class="section highlights">
     <div class="container">
         <h2 class="section-title">Career Highlights</h2>
-        
-        <div class="highlights-grid">
+          <div class="highlights-grid">
             <div class="highlight-card">
                 <div class="highlight-icon">
                     <i class="fab fa-tiktok"></i>
                 </div>
-                <h3 class="highlight-title">Digital Influence</h3>
-                <p class="highlight-desc">1 M+ TikTok followers · 250 M+ total views</p>
+                <h3 class="highlight-title">Global<br>Digital Influence</h3>
+                <p class="highlight-desc">"USA Medical" (2022-Present) Self, 1 M+ TikTok Followers</p>                <div class="highlight-image">
+                    {{ smart_image('tiktok-highlight', 'TikTok USA Medical Content') }}
+                </div>
             </div>
             
             <div class="highlight-card">
                 <div class="highlight-icon">
                     <i class="fas fa-tv"></i>
                 </div>
-                <h3 class="highlight-title">ESPN+ Sketch Comedy Series</h3>
-                <p class="highlight-desc">"FUSE: (2019)" · Self, Executive Producer</p>
+                <h3 class="highlight-title">ESPN+<br>Sketch Comedy Series</h3>
+                <p class="highlight-desc">"FUSE" (2019) · Self, Executive Producer</p>                <div class="highlight-image">
+                    {{ smart_image('espn-fuse-highlight', 'ESPN+ FUSE Sketch Comedy') }}
+                </div>
             </div>
             
             <div class="highlight-card">
                 <div class="highlight-icon">
                     <i class="fas fa-film"></i>
                 </div>
-                <h3 class="highlight-title">Lester Speight Independent Pilot</h3>
-                <p class="highlight-desc">"Continue to Win" (2025) · Trent Harlen, Rival Running Back</p>
+                <h3 class="highlight-title">Lester Speight<br>Independent Pilot</h3>
+                <p class="highlight-desc">"Continue to Win" (2025) · Trent Harlen, Rival Running Back</p>                <div class="highlight-image">
+                    {{ smart_image('continue-to-win-highlight', 'Continue to Win Independent Pilot') }}
+                </div>
             </div>
         </div>
     </div>
