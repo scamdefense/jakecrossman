@@ -4,10 +4,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const navMenu = document.getElementById('nav-menu');
     
     if (navToggle && navMenu) {
+        // Handle both click and touch events
         navToggle.addEventListener('click', function() {
             navToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
+        
+        // Add touch event support for better mobile responsiveness
+        navToggle.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        }, { passive: false });
         
         // Close menu when clicking on a link
         const navLinks = document.querySelectorAll('.nav-link');
@@ -16,6 +24,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 navToggle.classList.remove('active');
                 navMenu.classList.remove('active');
             });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+        
+        // Close menu on orientation change
+        window.addEventListener('orientationchange', function() {
+            navToggle.classList.remove('active');
+            navMenu.classList.remove('active');
         });
     }
 });
@@ -406,6 +428,41 @@ function initResume() {
             downloadResumeAsPDF();
         });
     }
+    
+    // Handle responsive layout changes
+    handleResumeLayoutResize();
+    window.addEventListener('resize', debounce(handleResumeLayoutResize, 250));
+    window.addEventListener('orientationchange', function() {
+        setTimeout(handleResumeLayoutResize, 300);
+    });
+}
+
+// ===== RESUME LAYOUT RESIZE HANDLER =====
+function handleResumeLayoutResize() {
+    const resumeContainer = document.getElementById('resume-container');
+    if (!resumeContainer) return;
+    
+    const isMobile = window.innerWidth <= 768;
+    const isLandscape = window.innerWidth > window.innerHeight && window.innerHeight <= 500;
+    
+    // Add/remove mobile-specific classes for enhanced styling
+    if (isMobile) {
+        resumeContainer.classList.add('mobile-layout');
+        if (isLandscape) {
+            resumeContainer.classList.add('landscape-mode');
+        } else {
+            resumeContainer.classList.remove('landscape-mode');
+        }
+    } else {
+        resumeContainer.classList.remove('mobile-layout', 'landscape-mode');
+    }
+    
+    // Trigger layout recalculation for better mobile performance
+    if (isMobile) {
+        resumeContainer.style.display = 'none';
+        resumeContainer.offsetHeight; // Force reflow
+        resumeContainer.style.display = '';
+    }
 }
 
 // ===== RESUME PAGE ANIMATIONS =====
@@ -433,6 +490,19 @@ function initResumeAnimations() {
     });
     
     resumeElements.forEach(el => resumeObserver.observe(el));
+    
+    // Add mobile-specific touch improvements for resume elements
+    if (window.innerWidth <= 768) {
+        resumeElements.forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            }, { passive: true });
+            
+            element.addEventListener('touchend', function() {
+                this.style.transform = '';
+            }, { passive: true });
+        });
+    }
 }
 
 // ===== DOWNLOAD RESUME AS PDF =====
@@ -1034,3 +1104,44 @@ if (!window.IntersectionObserver) {
         el.classList.add('visible');
     });
 }
+
+// ===== MOBILE TOUCH IMPROVEMENTS =====
+// Add better touch support for buttons
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.btn, .gallery-item, .highlight-card');
+    
+    buttons.forEach(button => {
+        button.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.98)';
+        }, { passive: true });
+        
+        button.addEventListener('touchend', function() {
+            this.style.transform = '';
+        }, { passive: true });
+    });
+});
+
+// ===== MOBILE FORM IMPROVEMENTS =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle virtual keyboard on mobile
+    if (window.innerWidth <= 768) {
+        const inputs = document.querySelectorAll('input, textarea');
+        
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                setTimeout(() => {
+                    this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            });
+        });
+    }
+    
+    // Improve checkbox touch targets
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        const wrapper = document.createElement('div');
+        wrapper.style.cssText = 'min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center;';
+        checkbox.parentNode.insertBefore(wrapper, checkbox);
+        wrapper.appendChild(checkbox);
+    });
+});
