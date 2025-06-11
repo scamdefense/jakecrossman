@@ -27,8 +27,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application files
 COPY app/ ./app/
 COPY app.py .
-
-# Note: templates and static are already copied as part of app/ directory above
+COPY wsgi.py .
 
 # Create non-root user
 RUN useradd --create-home --shell /bin/bash app
@@ -36,4 +35,4 @@ USER app
 
 EXPOSE 5000
 
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "wsgi:app"]
