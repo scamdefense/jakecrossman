@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Contact Hero -->
+<section class="contact-hero">
+    <div class="container">
+        <h1 class="section-title">Get In Touch</h1>
+        <p style="font-size: 1.2rem; color: #cccccc; max-width: 600px; margin: 0 auto;">Ready to collaborate? Let's discuss your next project and bring your vision to life.</p>
+    </div>
+</section>
+
+<!-- Contact Content -->
+<section class="section">
+    <div class="container">
+        <div class="contact-content">
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h3 style="color: #ffd700; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-envelope"></i> Booking Inquiry
+                </h3>
+                
+                <form id="contact-form" method="POST" action="{{ url_for('main.contact') }}">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="production">Production/Project</label>
+                        <input type="text" id="production" name="production" placeholder="Project title or production company">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="role">Role/Opportunity</label>
+                        <input type="text" id="role" name="role" placeholder="Character, spokesperson, content creator, etc.">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="timeline">Timeline</label>
+                        <input type="text" id="timeline" name="timeline" placeholder="Shooting dates, availability needed">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="6" placeholder="Please provide details about your project, role requirements, compensation, and any other relevant information." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="resume-attach" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; color: #cccccc;">
+                            <input type="checkbox" id="resume-attach" name="resume_attach" style="margin: 0;">
+                            Request current resume/headshot package
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+                
+                <p style="color: #999999; font-size: 0.9rem; margin-top: 1rem; text-align: center;">
+                    All inquiries will be responded to within 24-48 hours.
+                </p>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h3 style="color: #ffd700; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-address-card"></i> Direct Contact
+                </h3>
+                
+                <div class="contact-method">
+                    <h4><i class="fas fa-envelope"></i> Email</h4>
+                    <p>
+                        <a href="mailto:crossmantv@outlook.com">crossmantv@outlook.com</a><br>
+                        <small style="color: #999999;">Primary contact for all professional inquiries</small>
+                    </p>
+                </div>
+                
+                <div class="contact-method">
+                    <h4><i class="fas fa-phone"></i> Phone</h4>
+                    <p>
+                        <a href="tel:814-403-0835">814-403-0835</a><br>
+                        <small style="color: #999999;">Available for urgent bookings and consultations</small>
+                    </p>
+                </div>
+                
+                <div class="contact-method">
+                    <h4><i class="fas fa-map-marker-alt"></i> Location</h4>
+                    <p>
+                        Los Angeles, CA & Virginia<br>
+                        <small style="color: #999999;">Willing to travel for projects</small>
+                    </p>
+                </div>
+                
+                <div class="contact-method">
+                    <h4><i class="fas fa-briefcase"></i> Representation</h4>
+                    <p>
+                        Available upon request<br>
+                        <small style="color: #999999;">Agent and manager information provided for confirmed bookings</small>
+                    </p>
+                </div>
+                
+                <!-- Social Media & Profiles -->
+                <div class="social-profiles">
+                    <h4 style="color: #ffd700; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-share-alt"></i> Social & Profiles
+                    </h4>
+                    
+                    <div class="social-grid">
+                        <a href="https://tiktok.com/@usamedical" target="_blank" rel="noopener" class="social-link">
+                            <i class="fab fa-tiktok"></i>
+                            <span>TikTok</span>
+                        </a>
+                        
+                        <a href="https://instagram.com/jakecrossman" target="_blank" rel="noopener" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        
+                        <a href="#" target="_blank" rel="noopener" class="social-link">
+                            <i class="fab fa-imdb"></i>
+                            <span>IMDb</span>
+                        </a>
+                        
+                        <a href="#" target="_blank" rel="noopener" class="social-link">
+                            <i class="fas fa-star"></i>
+                            <span>Spotlight</span>
+                        </a>
+                        
+                        <a href="#" target="_blank" rel="noopener" class="social-link">
+                            <i class="fas fa-theater-masks"></i>
+                            <span>Backstage</span>
+                        </a>
+                        
+                        <a href="https://linkedin.com/in/jakecrossman" target="_blank" rel="noopener" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Response Times -->
+<section class="section" style="background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.1);">
+    <div class="container">
+        <h2 class="section-title">What to Expect</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+            <div style="text-align: center; padding: 2rem; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 3rem; color: #ffd700; margin-bottom: 1rem;">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3 style="color: #ffffff; margin-bottom: 1rem;">Quick Response</h3>
+                <p style="color: #cccccc; margin: 0;">All professional inquiries receive a response within 24-48 hours, often sooner.</p>
+            </div>
+            
+            <div style="text-align: center; padding: 2rem; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 3rem; color: #ffd700; margin-bottom: 1rem;">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3 style="color: #ffffff; margin-bottom: 1rem;">Complete Materials</h3>
+                <p style="color: #cccccc; margin: 0;">Current headshots, resume, and reel available immediately upon request.</p>
+            </div>
+            
+            <div style="text-align: center; padding: 2rem; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 3rem; color: #ffd700; margin-bottom: 1rem;">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3 style="color: #ffffff; margin-bottom: 1rem;">Professional Service</h3>
+                <p style="color: #cccccc; margin: 0;">Reliable, prepared, and committed to bringing your vision to life.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; border-left: 4px solid #ffd700;">
+                <h4 style="color: #ffd700; margin-bottom: 1rem;">What's your availability for travel?</h4>
+                <p style="color: #cccccc; margin: 0;">I'm based between Los Angeles and Virginia and am fully available for travel anywhere for the right project. I have experience with both coasts and am comfortable with various shooting locations.</p>
+            </div>
+            
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; border-left: 4px solid #ffd700;">
+                <h4 style="color: #ffd700; margin-bottom: 1rem;">Do you work with smaller/independent productions?</h4>
+                <p style="color: #cccccc; margin: 0;">Absolutely! I'm passionate about storytelling at every level and have experience with both major network content (ESPN+) and independent projects. Great stories come from everywhere.</p>
+            </div>
+            
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; border-left: 4px solid #ffd700;">
+                <h4 style="color: #ffd700; margin-bottom: 1rem;">Can you help with content creation and social media?</h4>
+                <p style="color: #cccccc; margin: 0;">Yes! With 1M+ TikTok followers and extensive digital media experience, I can contribute to both the performance and promotional aspects of your project.</p>
+            </div>
+            
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 2rem; border-left: 4px solid #ffd700;">
+                <h4 style="color: #ffd700; margin-bottom: 1rem;">What about athletic/physical roles?</h4>
+                <p style="color: #cccccc; margin: 0;">Athletic performance is one of my strongest assets. I have extensive sports background and am comfortable with physical comedy, action sequences, and sports-related content.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

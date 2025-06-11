@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="title-card">
+            <h1 class="hero-name">JACOB "JAKE" CROSSMAN</h1>
+            <p class="hero-title">Actor | Los Angeles, CA & Lynchburg, Virginia</p>
+            <p class="hero-contact">814-403-0835 | crossmantv@outlook.com<br>
+            <p class="hero-stats">Height: 5′10″ | Eyes: Blue | Hair: Dusty Blonde | Build: Athletic</p>
+            <p class="hero-stats">(Available Locally in Additional Markets)</p>
+        </div>
+        
+        <p class="hero-tagline">Jake is a dynamic actor who brings characters to life.
+            His spontaneous energy and genuine performances breathe life into every beat from the first table read.</p>
+        
+        <div class="hero-ctas">
+            <a href="{{ url_for('main.reel') }}" class="btn btn-primary">
+                <i class="fas fa-play"></i> View Full Reel
+            </a>            <a href="{{ url_for('main.resume') }}" class="btn btn-secondary">
+                <i class="fas fa-file-alt"></i> View Resume
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Demo Reel Preview Section -->
+<section class="section demo-reel">
+    <div class="container">
+        <h2 class="section-title">Demo Reel Preview</h2>        <div class="video-container">
+            <video controls preload="metadata" poster="{{ url_for('static', filename='images/demo-reel-thumbnail.jpg') }}" 
+                   style="width: 100%; height: 100%; border-radius: 12px;" 
+                   controlslist="nodownload">
+                <source src="{{ url_for('main.serve_video', filename='demo-reel.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <p class="video-caption">A selection of my best on-camera work: comedy, drama & sketch.</p>
+    </div>
+</section>
+
+<!-- Highlights Carousel -->
+<section class="section highlights">
+    <div class="container">
+        <h2 class="section-title">Career Highlights</h2>
+        
+        <div class="highlights-grid">
+            <div class="highlight-card">
+                <div class="highlight-icon">
+                    <i class="fab fa-tiktok"></i>
+                </div>
+                <h3 class="highlight-title">Digital Influence</h3>
+                <p class="highlight-desc">1 M+ TikTok followers · 250 M+ total views</p>
+            </div>
+            
+            <div class="highlight-card">
+                <div class="highlight-icon">
+                    <i class="fas fa-tv"></i>
+                </div>
+                <h3 class="highlight-title">ESPN+ Sketch Comedy Series</h3>
+                <p class="highlight-desc">"FUSE: (2019)" · Self, Executive Producer</p>
+            </div>
+            
+            <div class="highlight-card">
+                <div class="highlight-icon">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h3 class="highlight-title">Lester Speight Independent Pilot</h3>
+                <p class="highlight-desc">"Continue to Win" (2025) · Trent Harlen, Rival Running Back</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Bio Snippet -->
+<section class="section bio">
+    <div class="container">
+        <h2 class="section-title">About Jake</h2>
+        <div class="bio-content">
+            <p>"Jake Crossman is a versatile performer whose athletic background and bold humor drive memorable character work across screen and stage."</p>
+            <a href="{{ url_for('main.about') }}" class="btn btn-primary">Learn More About Jake</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

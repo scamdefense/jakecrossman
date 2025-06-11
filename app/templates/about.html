@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- About Hero Section -->
+<section class="about-hero">
+    <div class="container">
+        <div class="about-content">            <div class="headshot-container">
+                <img src="{{ url_for('static', filename='images/headshot-1.jpg') }}" 
+                     alt="Jake Crossman Professional Headshot" 
+                     class="headshot"
+                     style="width: 100%; max-width: 400px; height: auto; border-radius: 12px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); border: 3px solid rgba(255, 215, 0, 0.3);">
+            </div>
+            
+            <div class="bio-text">
+                <h2>Jacob "Jake"Crossman</h2>
+                <p>Jacob "Jake" Crossman is an actor and digital creator splitting time between Los Angeles and his home state of Virginia. A natural athlete with strong comedic instincts, Jake first made his mark on ESPN+'s sports-comedy series <em>Fuse</em> and most recently headlined the indie pilot <em>Continue to Win</em>.</p>
+                
+                <p>Trained in classical theatre—originating Fagin in <em>Oliver Twist</em> at Erie's Warner Theater—he combines physicality, improvisation chops, and a magnetic presence to bring characters vividly to life. Off-camera, he leverages over 1 million TikTok followers to craft brand-driven health and wellness content with 250 million+ views.</p>
+                
+                <p>Jake's versatility spans from dramatic lead roles to sketch comedy, showcasing his range and dedication to the craft. His athletic background provides a unique physicality to his performances, while his digital media experience brings a contemporary edge to traditional acting.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Training & Education -->
+<section class="section training-skills">
+    <div class="container">
+        <h2 class="section-title">Training & Skills</h2>
+        
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h4><i class="fas fa-graduation-cap"></i> Training & Education</h4>
+                <ul>
+                    <li>BFA Acting, Erie Community College (2015)</li>
+                    <li>Improvisation, Second City Conservatory (2019)</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category">
+                <h4><i class="fas fa-trophy"></i> Awards & Honors</h4>
+                <ul>
+                    <li>Erie Community Theater "Best Lead Actor" (2017)</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category">
+                <h4><i class="fas fa-running"></i> Athletics</h4>
+                <ul>
+                    <li>Football</li>
+                    <li>Baseball</li>
+                    <li>Basketball</li>
+                    <li>Tennis</li>
+                    <li>Golf</li>
+                    <li>Swimming</li>
+                    <li>Running</li>
+                    <li>Skiing</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category">
+                <h4><i class="fas fa-music"></i> Music</h4>
+                <ul>
+                    <li>Piano</li>
+                    <li>Guitar</li>
+                    <li>Drums</li>
+                    <li>Vocals</li>
+                    <li>Music Production</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category">
+                <h4><i class="fas fa-globe"></i> Accents & Dialects</h4>
+                <ul>
+                    <li>General American</li>
+                    <li>Southern American</li>
+                    <li>LA Valley (Valley Girl)</li>
+                    <li>French</li>
+                    <li>Russian</li>
+                    <li>Irish</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category">
+                <h4><i class="fas fa-tools"></i> Special Skills</h4>
+                <ul>
+                    <li>Improv</li>
+                    <li>On-Camera Hosting</li>
+                    <li>Teleprompter Proficiency</li>
+                    <li>Voice-Over Narration</li>
+                    <li>Stage Combat (Basic)</li>
+                    <li>Digital Content Creation</li>
+                    <li>Social Media Strategy</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="section">
+    <div class="container">
+        <div class="text-center">
+            <h2>Ready to Work Together?</h2>
+            <p class="mb-3">Interested in collaborating or have a project in mind? Let's connect and bring your vision to life.</p>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <a href="{{ url_for('main.contact') }}" class="btn btn-primary">
+                    <i class="fas fa-envelope"></i> Get In Touch
+                </a>
+                <a href="{{ url_for('main.reel') }}" class="btn btn-secondary">
+                    <i class="fas fa-play"></i> View Demo Reel
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

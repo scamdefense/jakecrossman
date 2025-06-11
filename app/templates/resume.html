@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Resume Controls -->
+<section class="resume-controls">
+    <div class="container">
+        <div class="resume-actions">
+            <button id="print-resume" class="btn btn-primary">
+                <i class="fas fa-download"></i> Download PDF
+            </button>
+            <button id="toggle-layout" class="btn btn-secondary">
+                <i class="fas fa-columns"></i> Toggle Layout
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Dynamic Resume Container -->
+<div id="resume-container" class="resume-layout-modern">
+    
+    <!-- Resume Sidebar -->
+    <div class="resume-sidebar">
+        <div class="resume-profile">
+            <h1 class="resume-name">Jacob "Jake"<br>Crossman</h1>
+            <div class="resume-contact">
+                <p><i class="fas fa-map-marker-alt"></i> Los Angeles, CA & Lynchburg, VA</p>
+                <p><i class="fas fa-phone"></i> 814-403-0835</p>
+                <p><i class="fas fa-envelope"></i> crossmantv@outlook.com</p>
+                <p><i class="fas fa-globe"></i> jakecrossman.com</p>
+                <p><i class="fab fa-instagram"></i> @jakecrossman</p>
+                <p><i class="fab fa-tiktok"></i> @usamedical</p>
+            </div>
+        </div>
+        
+        <div class="resume-section">
+            <h3>Physical Stats</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Height:</span>
+                    <span class="stat-value">5′10″</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Eyes:</span>
+                    <span class="stat-value">Blue</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Hair:</span>
+                    <span class="stat-value">Dusty Blonde</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Build:</span>
+                    <span class="stat-value">Athletic</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="resume-section">
+            <h3>Digital Impact</h3>
+            <div class="impact-metrics">
+                <div class="metric">
+                    <span class="metric-number">1M+</span>
+                    <span class="metric-label">TikTok Followers</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-number">250M+</span>
+                    <span class="metric-label">Total Views</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-number">100K+</span>
+                    <span class="metric-label">ESPN+ Viewers</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume Main Content -->
+    <div class="resume-main">
+        <div class="resume-header-main">
+            <h2 class="resume-title">Jake Crossman</h2>
+            <p class="resume-tagline">Dynamic actor & digital influencer with athletic prowess and comedic flair—leveraging proven on-screen success and massive social media reach to deliver high-impact, character-driven performances.</p>
+        </div>
+
+        <div class="resume-section">
+            <h3><i class="fas fa-trophy"></i> Career Highlights</h3>
+            <div class="highlights-list">
+                <div class="highlight-item">
+                    <strong>Digital Influence:</strong> 1M+ TikTok followers (@usamedical), 250M+ total views across platforms
+                </div>
+                <div class="highlight-item">
+                    <strong>ESPN+ "Fuse":</strong> Starred in 6-episode sports comedy sketch series (~100K viewers per episode)
+                </div>
+                <div class="highlight-item">
+                    <strong>Independent Film:</strong> Lead antagonist role in "Continue to Win" (2025) directed by Lester Speight
+                </div>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h3><i class="fas fa-video"></i> On-Screen & Sketch Credits</h3>
+            <div class="credits-list">
+                <div class="credit-item">
+                    <div class="credit-header">
+                        <span class="credit-title">Continue to Win</span>
+                        <span class="credit-year">2025</span>
+                    </div>
+                    <div class="credit-details">
+                        <span class="credit-role">Antagonist Football Player</span>
+                        <span class="credit-type">Independent Pilot • Dir. Lester Speight</span>
+                    </div>
+                </div>
+                
+                <div class="credit-item">
+                    <div class="credit-header">
+                        <span class="credit-title">Fuse</span>
+                        <span class="credit-year">2023</span>
+                    </div>
+                    <div class="credit-details">
+                        <span class="credit-role">Executive Producer / On-Camera Talent</span>
+                        <span class="credit-type">ESPN+ Sketch Comedy Series (6 eps, ~100K viewers/ep)</span>
+                    </div>
+                </div>
+                
+                <div class="credit-item">
+                    <div class="credit-header">
+                        <span class="credit-title">After Curfew</span>
+                        <span class="credit-year">2018–2019</span>
+                    </div>
+                    <div class="credit-details">
+                        <span class="credit-role">Papa Gaines / Jason / Spokesperson</span>
+                        <span class="credit-type">Live-tape Sketch Comedy • Local Networks & TBN</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h3><i class="fas fa-theater-masks"></i> Theater</h3>
+            <div class="credits-list">
+                <div class="credit-item">
+                    <div class="credit-header">
+                        <span class="credit-title">Oliver Twist</span>
+                        <span class="credit-year">2016</span>
+                    </div>
+                    <div class="credit-details">
+                        <span class="credit-role">Fagin (Lead)</span>
+                        <span class="credit-type">Warner Theater, Erie, PA</span>
+                    </div>
+                </div>
+                
+                <div class="credit-item">
+                    <div class="credit-header">
+                        <span class="credit-title">The Canterbury Tales</span>
+                        <span class="credit-year">2017</span>
+                    </div>
+                    <div class="credit-details">
+                        <span class="credit-role">Chaucer</span>
+                        <span class="credit-type">Erie Community Theater</span>
+                    </div>
+                </div>
+                
+                <div class="credit-item">
+                    <div class="credit-header">
+                        <span class="credit-title">Cinderella</span>
+                        <span class="credit-year">2018</span>
+                    </div>
+                    <div class="credit-details">
+                        <span class="credit-role">Jester</span>
+                        <span class="credit-type">Erie Community Theater</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h3><i class="fas fa-briefcase"></i> Modeling & Brand Work</h3>
+            <div class="credits-list">
+                <div class="credit-item">
+                    <div class="credit-header">
+                        <span class="credit-title">LG @ CES</span>
+                        <span class="credit-year">2020–2021</span>
+                    </div>
+                    <div class="credit-details">
+                        <span class="credit-role">Brand Model</span>
+                        <span class="credit-type">Brand Push Agency</span>
+                    </div>
+                </div>
+                
+                <div class="credit-item">
+                    <div class="credit-header">
+                        <span class="credit-title">Automotive Campaign</span>
+                        <span class="credit-year">2022</span>
+                    </div>
+                    <div class="credit-details">
+                        <span class="credit-role">Trade Show Model</span>
+                        <span class="credit-type">Brand Push Agency</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h3><i class="fas fa-star"></i> Special Skills</h3>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Athletics</h4>
+                    <p>Football, Baseball, Basketball, Tennis, Golf, Swimming, Running, Skiing</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Music</h4>
+                    <p>Piano, Guitar, Drums, Vocals, Production</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Accents</h4>
+                    <p>General American, Southern American, French, Russian, Irish, LA Valley</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Technical</h4>
+                    <p>Video Editing (Premiere Pro, Final Cut Pro), Content Creation, Social Media Strategy</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Performance</h4>
+                    <p>Stage Combat, Voiceover, Sports Play-by-Play, Teleprompter, Improv</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h3><i class="fas fa-handshake"></i> Representation</h3>
+            <p class="representation-note">Available upon request</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

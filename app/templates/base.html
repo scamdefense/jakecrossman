@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }}{% else %}Jake Crossman - Actor{% endif %}</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+      <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Jake Crossman - Professional Actor based in Los Angeles, CA & Virginia. ESPN+ star, TikTok influencer with 1M+ followers, and versatile performer.">
+    <meta name="keywords" content="actor, performer, ESPN, TikTok, Los Angeles, Virginia, demo reel, portfolio">
+    <meta name="author" content="Jake Crossman">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% if title %}{{ title }}{% else %}Jake Crossman - Actor{% endif %}">
+    <meta property="og:description" content="Professional Actor based in Los Angeles, CA & Virginia. ESPN+ star and TikTok influencer with 1M+ followers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jakecrossman.com">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('main.index') }}" class="nav-logo">
+                JAKE CROSSMAN
+            </a>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="{{ url_for('main.index') }}" class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}">Home</a>
+                <a href="{{ url_for('main.about') }}" class="nav-link {% if request.endpoint == 'main.about' %}active{% endif %}">About</a>
+                <a href="{{ url_for('main.reel') }}" class="nav-link {% if request.endpoint == 'main.reel' %}active{% endif %}">Reel</a>
+                <a href="{{ url_for('main.resume') }}" class="nav-link {% if request.endpoint == 'main.resume' %}active{% endif %}">Resume</a>
+                <a href="{{ url_for('main.gallery') }}" class="nav-link {% if request.endpoint == 'main.gallery' %}active{% endif %}">Gallery</a>
+                <a href="{{ url_for('main.news') }}" class="nav-link {% if request.endpoint == 'main.news' %}active{% endif %}">News</a>
+                <a href="{{ url_for('main.contact') }}" class="nav-link {% if request.endpoint == 'main.contact' %}active{% endif %}">Contact</a>
+            </div>
+            
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Jake Crossman</h3>
+                    <p>Professional Actor<br>Los Angeles, CA & Virginia</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>
+                        <a href="mailto:crossmantv@outlook.com">crossmantv@outlook.com</a><br>
+                        <a href="tel:814-403-0835">814-403-0835</a>
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Follow</h4>
+                    <div class="social-links">
+                        <a href="https://tiktok.com/@usamedical" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://instagram.com/jakecrossman" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank" rel="noopener"><i class="fab fa-imdb"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; {{ moment().format('YYYY') if moment else '2025' }} Jake Crossman. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

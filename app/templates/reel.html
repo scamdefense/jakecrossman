@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Reel Hero Section -->
+<section class="reel-hero">
+    <div class="container">
+        <h1 class="section-title">Demo Reel</h1>
+        <p style="font-size: 1.2rem; color: #cccccc; max-width: 600px; margin: 0 auto;">A curated showcase of my range—drama, comedy, and physical performance.</p>
+    </div>
+</section>
+
+<!-- Main Video Player -->
+<section class="section">
+    <div class="container">        <div class="reel-video">            <div class="video-container">                <video controls preload="metadata" poster="{{ url_for('static', filename='images/demo-reel-thumbnail.jpg') }}" 
+                       style="width: 100%; height: 100%; border-radius: 12px;" 
+                       controlslist="nodownload">
+                    <source src="{{ url_for('main.serve_video', filename='demo-reel.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Scene Breakdown -->
+<section class="section scene-breakdown">
+    <div class="container">
+        <h2 class="section-title">Scene Breakdown</h2>
+        
+        <div style="overflow-x: auto;">
+            <table class="breakdown-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Project</th>
+                        <th>Role</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0:00</td>
+                        <td>Fuse (ESPN+, 2023)</td>
+                        <td>Executive Producer/Talent</td>
+                        <td>Sketch comedy; live segments</td>
+                    </tr>
+                    <tr>
+                        <td>0:20</td>
+                        <td>Continue to Win (2025)</td>
+                        <td>Antagonist Football Player</td>
+                        <td>Physical scenes; high tension</td>
+                    </tr>
+                    <tr>
+                        <td>0:45</td>
+                        <td>After Curfew (2018)</td>
+                        <td>Papa Gaines / Various</td>
+                        <td>Live-tape sketch; character work</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Additional Video Content -->
+<section class="section" style="background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.1);">
+    <div class="container">
+        <h2 class="section-title">Featured Clips</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+            <!-- ESPN+ Fuse Clip -->
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div class="video-placeholder" style="aspect-ratio: 16/9; margin-bottom: 1rem;">
+                    <div style="text-align: center;">
+                        <i class="fas fa-play" style="font-size: 2rem; color: #ffd700; margin-bottom: 0.5rem; display: block;"></i>
+                        <p style="color: #cccccc; margin: 0;">ESPN+ Fuse</p>
+                    </div>
+                </div>
+                <h4 style="color: #ffffff; margin-bottom: 0.5rem;">ESPN+ Fuse Highlights</h4>
+                <p style="color: #cccccc; font-size: 0.9rem; margin: 0;">Comedy sketches and live sports commentary segments</p>
+            </div>
+            
+            <!-- Continue to Win Clip -->
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div class="video-placeholder" style="aspect-ratio: 16/9; margin-bottom: 1rem;">
+                    <div style="text-align: center;">
+                        <i class="fas fa-play" style="font-size: 2rem; color: #ffd700; margin-bottom: 0.5rem; display: block;"></i>
+                        <p style="color: #cccccc; margin: 0;">Continue to Win</p>
+                    </div>
+                </div>
+                <h4 style="color: #ffffff; margin-bottom: 0.5rem;">Continue to Win (2025)</h4>
+                <p style="color: #cccccc; font-size: 0.9rem; margin: 0;">Dramatic scenes as lead antagonist in indie pilot</p>
+            </div>
+            
+            <!-- Theater Work -->
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div class="video-placeholder" style="aspect-ratio: 16/9; margin-bottom: 1rem;">
+                    <div style="text-align: center;">
+                        <i class="fas fa-theater-masks" style="font-size: 2rem; color: #ffd700; margin-bottom: 0.5rem; display: block;"></i>
+                        <p style="color: #cccccc; margin: 0;">Theater Reel</p>
+                    </div>
+                </div>
+                <h4 style="color: #ffffff; margin-bottom: 0.5rem;">Stage Performance</h4>
+                <p style="color: #cccccc; font-size: 0.9rem; margin: 0;">Classical theater work including Fagin in Oliver Twist</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="section">
+    <div class="container">
+        <div class="text-center">
+            <h2>Interested in Working Together?</h2>
+            <p class="mb-3">Ready to bring dynamic performance and proven talent to your next project.</p>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <a href="{{ url_for('main.contact') }}" class="btn btn-primary">
+                    <i class="fas fa-handshake"></i> Let's Collaborate
+                </a>                <a href="{{ url_for('main.resume') }}" class="btn btn-secondary">
+                    <i class="fas fa-file-alt"></i> View Resume
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
