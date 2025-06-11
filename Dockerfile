@@ -28,9 +28,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app/ ./app/
 COPY app.py .
 
-# Copy templates and static directories if they exist
-COPY templates/ ./templates/
-COPY static/ ./static/
+# Note: templates and static are already copied as part of app/ directory above
 
 # Create non-root user
 RUN useradd --create-home --shell /bin/bash app
