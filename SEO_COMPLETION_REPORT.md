@@ -19,7 +19,7 @@
 
 #### 🌐 Search Engine Optimization
 - **Primary keywords**: "Jake Crossman" and "Jacob Crossman" optimized
-- **Local SEO**: Los Angeles, CA & Virginia targeting
+- **Local SEO**: Los Angeles, CA targeting
 - **Professional focus**: Acting portfolio, demo reel, resume
 - **Social integration**: TikTok, Instagram, IMDB profiles
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
       <!-- Primary Meta Tags -->
     <title>{% if seo_data %}{{ seo_data.meta_tags.title }}{% elif title %}{{ title }}{% else %}Jake Crossman - Professional Actor{% endif %}</title>
-    <meta name="description" content="{% if seo_data %}{{ seo_data.meta_tags.description }}{% else %}Professional Actor based in Los Angeles, CA & Virginia. ESPN+ star, TikTok influencer with 1M+ followers, and versatile performer.{% endif %}">
+    <meta name="description" content="{% if seo_data %}{{ seo_data.meta_tags.description }}{% else %}Professional Actor based in Los Angeles, CA. ESPN+ star, TikTok influencer with 1M+ followers, and versatile performer.{% endif %}">
     <meta name="keywords" content="{% if seo_data %}{{ seo_data.meta_tags.keywords }}{% else %}Jake Crossman, Jacob Crossman, actor, performer, ESPN, TikTok, Los Angeles, Virginia, demo reel, portfolio{% endif %}">
     <meta name="author" content="{% if seo_data %}{{ seo_data.meta_tags.author }}{% else %}Jake Crossman{% endif %}">
     <meta name="robots" content="{% if seo_data %}{{ seo_data.meta_tags.robots }}{% else %}index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1{% endif %}">
@@ -30,7 +30,7 @@
     <meta property="og:type" content="{% if seo_data %}{{ seo_data.meta_tags.og_type }}{% else %}website{% endif %}">
     <meta property="og:url" content="{% if seo_data %}{{ seo_data.meta_tags.og_url }}{% else %}{{ request.url }}{% endif %}">
     <meta property="og:title" content="{% if seo_data %}{{ seo_data.meta_tags.og_title }}{% elif title %}{{ title }}{% else %}Jake Crossman - Professional Actor{% endif %}">
-    <meta property="og:description" content="{% if seo_data %}{{ seo_data.meta_tags.og_description }}{% else %}Professional Actor based in Los Angeles, CA & Virginia. ESPN+ star and TikTok influencer with 1M+ followers.{% endif %}">
+    <meta property="og:description" content="{% if seo_data %}{{ seo_data.meta_tags.og_description }}{% else %}Professional Actor based in Los Angeles, CA. ESPN+ star and TikTok influencer with 1M+ followers.{% endif %}">
     <meta property="og:image" content="{% if seo_data %}{{ seo_data.meta_tags.og_image }}{% else %}{{ url_for('static', filename='images/headshot-1.jpg', _external=True) }}{% endif %}">
     <meta property="og:image:width" content="{% if seo_data %}{{ seo_data.meta_tags.og_image_width }}{% else %}1200{% endif %}">
     <meta property="og:image:height" content="{% if seo_data %}{{ seo_data.meta_tags.og_image_height }}{% else %}630{% endif %}">
@@ -49,7 +49,7 @@
     <meta property="twitter:creator" content="{% if seo_data %}{{ seo_data.meta_tags.twitter_creator }}{% else %}@jakecrossman{% endif %}">
     <meta property="twitter:url" content="{% if seo_data %}{{ seo_data.meta_tags.og_url }}{% else %}{{ request.url }}{% endif %}">
     <meta property="twitter:title" content="{% if seo_data %}{{ seo_data.meta_tags.twitter_title }}{% elif title %}{{ title }}{% else %}Jake Crossman - Professional Actor{% endif %}">
-    <meta property="twitter:description" content="{% if seo_data %}{{ seo_data.meta_tags.twitter_description }}{% else %}Professional Actor based in Los Angeles, CA & Virginia. ESPN+ star and TikTok influencer with 1M+ followers.{% endif %}">
+    <meta property="twitter:description" content="{% if seo_data %}{{ seo_data.meta_tags.twitter_description }}{% else %}Professional Actor based in Los Angeles, CA. ESPN+ star and TikTok influencer with 1M+ followers.{% endif %}">
     <meta property="twitter:image" content="{% if seo_data %}{{ seo_data.meta_tags.twitter_image }}{% else %}{{ url_for('static', filename='images/headshot-1.jpg', _external=True) }}{% endif %}">
     <meta property="twitter:image:alt" content="{% if seo_data %}{{ seo_data.meta_tags.twitter_image_alt }}{% else %}Jake Crossman - Professional Actor{% endif %}">
     {% if seo_data and seo_data.meta_tags.twitter_player %}
@@ -405,7 +405,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Jake Crossman</h3>
-                    <p>Professional Actor<br>Los Angeles, CA & Virginia</p>
+                    <p>Professional Actor<br>Los Angeles, CA</p>
                 </div>
                 
                 <div class="footer-section">

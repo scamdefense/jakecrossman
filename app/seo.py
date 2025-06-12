@@ -13,7 +13,7 @@ class SEOConfig:
     SITE_URL = "https://jakecrossman.com"
     DEFAULT_TITLE = "Jake Crossman - Actor"
     DEFAULT_DESCRIPTION = (
-        "Professional Actor based in Los Angeles, CA & Virginia. "
+        "Professional Actor based in Los Angeles, CA. "
         "ESPN+ star, TikTok influencer with 1M+ followers, and versatile "
         "performer specializing in comedy, drama, and digital content creation."
     )
@@ -567,7 +567,7 @@ def get_page_seo_data(page_name: str, **kwargs) -> Dict:
             "description": (
                 "Professional Actor Jake Crossman brings dynamic energy to "
                 "every role. ESPN+ star, TikTok influencer with 1M+ followers. "
-                "Based in Los Angeles, CA & Virginia."
+                "Based in Los Angeles, CA."
             ),
             "keywords": [
                 "Jake Crossman actor",
