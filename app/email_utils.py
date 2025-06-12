@@ -59,7 +59,8 @@ def create_email_body(form_data):
     <p><strong>Name:</strong> {name}</p>
     <p><strong>Email:</strong> {email}</p>
     <p><strong>Production/Project:</strong> {production}</p>
-    <p><strong>Role/Opportunity:</strong> {role}</p>    <p><strong>Timeline:</strong> {timeline}</p>
+    <p><strong>Role/Opportunity:</strong> {role}</p>
+    <p><strong>Timeline:</strong> {timeline}</p>
     <p><strong>Message:</strong> {message}</p>
     {f'<p><strong>Professional Materials Package Requested:</strong> '
      f'"Yes</p>' if resume_attach else ''}
