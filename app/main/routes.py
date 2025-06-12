@@ -24,7 +24,7 @@ def index():
     seo_data = get_page_seo_data("index")
     return render_template(
         "index.html",
-        title="Jake Crossman - Professional Actor | Los Angeles & Virginia",
+        title="Jake Crossman - Professional Actor | Los Angeles, CA",
         seo_data=seo_data,
     )
 

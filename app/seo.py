@@ -715,7 +715,7 @@ def get_page_seo_data(page_name: str, **kwargs) -> Dict:
                     "answer": (
                         "Jake is available for projects year-round and can "
                         "travel anywhere for the right opportunity. He's based "
-                        "between Los Angeles, CA and Lynchburg, Virginia."
+                        "between Los Angeles, CA and Virginia."
                     ),
                 },
                 {
