@@ -99,7 +99,11 @@ if (contactForm) {
         const formData = new FormData(this);
         const formObject = {};
         formData.forEach((value, key) => {
-            formObject[key] = value;
+            if (key === 'resume_attach') {
+                formObject[key] = document.getElementById('resume-attach').checked;
+            } else {
+                formObject[key] = value;
+            }
         });
         
         // Simple validation
@@ -113,9 +117,38 @@ if (contactForm) {
             return;
         }
         
-        // Simulate form submission (replace with actual backend endpoint)
-        showNotification('Thank you for your message! I will get back to you soon.', 'success');
-        this.reset();
+        // Show loading state
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitButton.disabled = true;
+        
+        // Submit form via AJAX
+        fetch('/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formObject)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showNotification(data.message, 'success');
+                this.reset();
+            } else {
+                showNotification(data.message, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showNotification('Sorry, there was an error sending your message. Please try again or contact me directly.', 'error');
+        })
+        .finally(() => {
+            // Restore button state
+            submitButton.innerHTML = originalButtonText;
+            submitButton.disabled = false;
+        });
     });
 }
 
@@ -1144,4 +1177,279 @@ document.addEventListener('DOMContentLoaded', function() {
         checkbox.parentNode.insertBefore(wrapper, checkbox);
         wrapper.appendChild(checkbox);
     });
+});
+
+// ===== PWA SERVICE WORKER REGISTRATION =====
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/static/js/sw.js')
+            .then(registration => {
+                console.log('[PWA] Service Worker registered successfully:', registration);
+                
+                // Handle service worker updates
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            // Show update notification
+                            showUpdateNotification();
+                        }
+                    });
+                });
+            })
+            .catch(error => {
+                console.log('[PWA] Service Worker registration failed:', error);
+            });
+        
+        // Listen for service worker messages
+        navigator.serviceWorker.addEventListener('message', event => {
+            if (event.data && event.data.type === 'SW_UPDATE_READY') {
+                showUpdateNotification();
+            }
+        });
+    });
+}
+
+// Show update notification for PWA
+function showUpdateNotification() {
+    const notification = document.createElement('div');
+    notification.className = 'update-notification';
+    notification.innerHTML = `
+        <div class="notification-content">
+            <p>A new version is available!</p>
+            <button onclick="updateApp()">Update</button>
+            <button onclick="dismissUpdate(this)">Later</button>
+        </div>
+    `;
+    document.body.appendChild(notification);
+}
+
+// Update PWA
+function updateApp() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then(registration => {
+            if (registration && registration.waiting) {
+                registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+                window.location.reload();
+            }
+        });
+    }
+}
+
+// Dismiss update notification
+function dismissUpdate(button) {
+    const notification = button.closest('.update-notification');
+    if (notification) {
+        notification.remove();
+    }
+}
+
+// ===== SEO ENHANCEMENTS =====
+
+// Critical Web Vitals monitoring
+function initWebVitals() {
+    if (typeof gtag !== 'undefined') {
+        // Largest Contentful Paint
+        new PerformanceObserver((entryList) => {
+            for (const entry of entryList.getEntries()) {
+                gtag('event', 'web_vitals', {
+                    'metric_name': 'LCP',
+                    'metric_value': Math.round(entry.startTime),
+                    'metric_rating': entry.startTime < 2500 ? 'good' : entry.startTime < 4000 ? 'needs-improvement' : 'poor'
+                });
+            }
+        }).observe({entryTypes: ['largest-contentful-paint']});
+        
+        // First Input Delay
+        new PerformanceObserver((entryList) => {
+            for (const entry of entryList.getEntries()) {
+                gtag('event', 'web_vitals', {
+                    'metric_name': 'FID',
+                    'metric_value': Math.round(entry.processingStart - entry.startTime),
+                    'metric_rating': entry.processingStart - entry.startTime < 100 ? 'good' : entry.processingStart - entry.startTime < 300 ? 'needs-improvement' : 'poor'
+                });
+            }
+        }).observe({entryTypes: ['first-input']});
+        
+        // Cumulative Layout Shift
+        let clsValue = 0;
+        new PerformanceObserver((entryList) => {
+            for (const entry of entryList.getEntries()) {
+                if (!entry.hadRecentInput) {
+                    clsValue += entry.value;
+                }
+            }
+            gtag('event', 'web_vitals', {
+                'metric_name': 'CLS',
+                'metric_value': Math.round(clsValue * 1000),
+                'metric_rating': clsValue < 0.1 ? 'good' : clsValue < 0.25 ? 'needs-improvement' : 'poor'
+            });
+        }).observe({entryTypes: ['layout-shift']});
+    }
+}
+
+// Enhanced image lazy loading with intersection observer
+function initLazyLoading() {
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    
+                    // Handle WebP support
+                    if (img.dataset.srcWebp && supportsWebP()) {
+                        img.src = img.dataset.srcWebp;
+                    } else if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                    }
+                    
+                    // Handle srcset
+                    if (img.dataset.srcset) {
+                        img.srcset = img.dataset.srcset;
+                    }
+                    
+                    img.classList.remove('lazy');
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                    
+                    // Track image load for analytics
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'image_load', {
+                            'image_src': img.src,
+                            'image_alt': img.alt || 'No alt text'
+                        });
+                    }
+                }
+            });
+        }, {
+            rootMargin: '50px 0px',
+            threshold: 0.01
+        });
+        
+        document.querySelectorAll('img[data-src], img[data-srcset]').forEach(img => {
+            imageObserver.observe(img);
+        });
+    }
+}
+
+// Check WebP support
+function supportsWebP() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1;
+    canvas.height = 1;
+    return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+}
+
+// Enhanced analytics tracking
+function trackUserEngagement() {
+    let maxScroll = 0;
+    let startTime = Date.now();
+    
+    // Track scroll depth
+    window.addEventListener('scroll', throttle(() => {
+        const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+        
+        if (scrollPercent > maxScroll) {
+            maxScroll = scrollPercent;
+            
+            // Track milestone scroll depths
+            if ([25, 50, 75, 90].includes(maxScroll) && typeof gtag !== 'undefined') {
+                gtag('event', 'scroll_depth', {
+                    'percent_scrolled': maxScroll,
+                    'page_location': window.location.href
+                });
+            }
+        }
+    }, 250));
+    
+    // Track time on page
+    window.addEventListener('beforeunload', () => {
+        const timeOnPage = Math.round((Date.now() - startTime) / 1000);
+        
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_timing', {
+                'time_on_page': timeOnPage,
+                'page_location': window.location.href
+            });
+        }
+    });
+    
+    // Track outbound links
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.hostname !== window.location.hostname) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'outbound_click', {
+                    'outbound_url': link.href,
+                    'outbound_domain': link.hostname
+                });
+            }
+        }
+    });
+}
+
+// Throttle function for performance
+function throttle(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Enhanced contact form tracking
+function initFormTracking() {
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        // Track form start
+        const formInputs = contactForm.querySelectorAll('input, textarea, select');
+        formInputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_start', {
+                        'form_name': 'contact_form',
+                        'form_location': window.location.href
+                    });
+                }
+            }, { once: true });
+        });
+        
+        // Track form submission
+        contactForm.addEventListener('submit', (e) => {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_submit', {
+                    'form_name': 'contact_form',
+                    'form_location': window.location.href
+                });
+            }
+        });
+    }
+}
+
+// Performance optimization for images
+function optimizeImages() {
+    // Add loading="lazy" to images that don't have it
+    document.querySelectorAll('img:not([loading])').forEach(img => {
+        if (img.getBoundingClientRect().top > window.innerHeight) {
+            img.loading = 'lazy';
+        }
+    });
+    
+    // Add decoding="async" for better performance
+    document.querySelectorAll('img:not([decoding])').forEach(img => {
+        img.decoding = 'async';
+    });
+}
+
+// Initialize all SEO enhancements
+document.addEventListener('DOMContentLoaded', () => {
+    initWebVitals();
+    initLazyLoading();
+    trackUserEngagement();
+    initFormTracking();
+    optimizeImages();
 });

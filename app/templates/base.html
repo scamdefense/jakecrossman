@@ -1,35 +1,292 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="https://schema.org/WebPage">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>{% if title %}{{ title }}{% else %}Jake Crossman - Actor{% endif %}</title>
-
-    <!-- Fonts -->
+      <!-- Primary Meta Tags -->
+    <title>{% if seo_data %}{{ seo_data.meta_tags.title }}{% elif title %}{{ title }}{% else %}Jake Crossman - Professional Actor{% endif %}</title>
+    <meta name="description" content="{% if seo_data %}{{ seo_data.meta_tags.description }}{% else %}Professional Actor based in Los Angeles, CA & Virginia. ESPN+ star, TikTok influencer with 1M+ followers, and versatile performer.{% endif %}">
+    <meta name="keywords" content="{% if seo_data %}{{ seo_data.meta_tags.keywords }}{% else %}Jake Crossman, Jacob Crossman, actor, performer, ESPN, TikTok, Los Angeles, Virginia, demo reel, portfolio{% endif %}">
+    <meta name="author" content="{% if seo_data %}{{ seo_data.meta_tags.author }}{% else %}Jake Crossman{% endif %}">
+    <meta name="robots" content="{% if seo_data %}{{ seo_data.meta_tags.robots }}{% else %}index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1{% endif %}">
+    <meta name="language" content="{% if seo_data %}{{ seo_data.meta_tags.language }}{% else %}en-US{% endif %}">
+    <meta name="content-language" content="{% if seo_data %}{{ seo_data.meta_tags.content_language }}{% else %}en{% endif %}">
+    
+    <!-- Geographic Meta Tags -->
+    {% if seo_data and seo_data.meta_tags.geo_region %}
+    <meta name="geo.region" content="{{ seo_data.meta_tags.geo_region }}">
+    <meta name="geo.placename" content="{{ seo_data.meta_tags.geo_placename }}">
+    <meta name="geo.position" content="{{ seo_data.meta_tags.geo_position }}">
+    <meta name="ICBM" content="{{ seo_data.meta_tags.ICBM }}">
+    {% endif %}
+    
+    <!-- Security and Privacy -->
+    <meta name="referrer" content="{% if seo_data %}{{ seo_data.meta_tags.referrer }}{% else %}strict-origin-when-cross-origin{% endif %}">
+    <meta http-equiv="Permissions-Policy" content="{% if seo_data %}{{ seo_data.meta_tags.permissions_policy }}{% else %}camera=(), microphone=(), geolocation=(){% endif %}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{% if seo_data %}{{ seo_data.meta_tags.canonical_url }}{% else %}{{ request.url }}{% endif %}">
+      <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% if seo_data %}{{ seo_data.meta_tags.og_type }}{% else %}website{% endif %}">
+    <meta property="og:url" content="{% if seo_data %}{{ seo_data.meta_tags.og_url }}{% else %}{{ request.url }}{% endif %}">
+    <meta property="og:title" content="{% if seo_data %}{{ seo_data.meta_tags.og_title }}{% elif title %}{{ title }}{% else %}Jake Crossman - Professional Actor{% endif %}">
+    <meta property="og:description" content="{% if seo_data %}{{ seo_data.meta_tags.og_description }}{% else %}Professional Actor based in Los Angeles, CA & Virginia. ESPN+ star and TikTok influencer with 1M+ followers.{% endif %}">
+    <meta property="og:image" content="{% if seo_data %}{{ seo_data.meta_tags.og_image }}{% else %}{{ url_for('static', filename='images/headshot-1.jpg', _external=True) }}{% endif %}">
+    <meta property="og:image:width" content="{% if seo_data %}{{ seo_data.meta_tags.og_image_width }}{% else %}1200{% endif %}">
+    <meta property="og:image:height" content="{% if seo_data %}{{ seo_data.meta_tags.og_image_height }}{% else %}630{% endif %}">
+    <meta property="og:image:alt" content="{% if seo_data %}{{ seo_data.meta_tags.og_image_alt }}{% else %}Jake Crossman - Professional Actor{% endif %}">
+    <meta property="og:site_name" content="{% if seo_data %}{{ seo_data.meta_tags.og_site_name }}{% else %}Jake Crossman - Professional Actor{% endif %}">
+    <meta property="og:locale" content="{% if seo_data %}{{ seo_data.meta_tags.og_locale }}{% else %}en_US{% endif %}">
+    {% if seo_data and seo_data.meta_tags.og_video %}
+    <meta property="og:video" content="{{ seo_data.meta_tags.og_video }}">
+    <meta property="og:video:type" content="video/mp4">
+    <meta property="og:video:width" content="1920">
+    <meta property="og:video:height" content="1080">
+    {% endif %}
+      <!-- Twitter Card -->
+    <meta property="twitter:card" content="{% if seo_data %}{{ seo_data.meta_tags.twitter_card }}{% else %}summary_large_image{% endif %}">
+    <meta property="twitter:site" content="{% if seo_data %}{{ seo_data.meta_tags.twitter_site }}{% else %}@jakecrossman{% endif %}">
+    <meta property="twitter:creator" content="{% if seo_data %}{{ seo_data.meta_tags.twitter_creator }}{% else %}@jakecrossman{% endif %}">
+    <meta property="twitter:url" content="{% if seo_data %}{{ seo_data.meta_tags.og_url }}{% else %}{{ request.url }}{% endif %}">
+    <meta property="twitter:title" content="{% if seo_data %}{{ seo_data.meta_tags.twitter_title }}{% elif title %}{{ title }}{% else %}Jake Crossman - Professional Actor{% endif %}">
+    <meta property="twitter:description" content="{% if seo_data %}{{ seo_data.meta_tags.twitter_description }}{% else %}Professional Actor based in Los Angeles, CA & Virginia. ESPN+ star and TikTok influencer with 1M+ followers.{% endif %}">
+    <meta property="twitter:image" content="{% if seo_data %}{{ seo_data.meta_tags.twitter_image }}{% else %}{{ url_for('static', filename='images/headshot-1.jpg', _external=True) }}{% endif %}">
+    <meta property="twitter:image:alt" content="{% if seo_data %}{{ seo_data.meta_tags.twitter_image_alt }}{% else %}Jake Crossman - Professional Actor{% endif %}">
+    {% if seo_data and seo_data.meta_tags.twitter_player %}
+    <meta property="twitter:player" content="{{ seo_data.meta_tags.twitter_player }}">
+    <meta property="twitter:player:width" content="1920">
+    <meta property="twitter:player:height" content="1080">
+    {% endif %}
+      <!-- Mobile & App Meta Tags -->
+    <meta name="viewport" content="{% if seo_data %}{{ seo_data.meta_tags.viewport }}{% else %}width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes{% endif %}">
+    <meta name="theme-color" content="{% if seo_data %}{{ seo_data.meta_tags.theme_color }}{% else %}#ffd700{% endif %}">
+    <meta name="color-scheme" content="{% if seo_data %}{{ seo_data.meta_tags.color_scheme }}{% else %}dark light{% endif %}">
+    <meta name="apple-mobile-web-app-capable" content="{% if seo_data %}{{ seo_data.meta_tags.apple_mobile_web_app_capable }}{% else %}yes{% endif %}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="{% if seo_data %}{{ seo_data.meta_tags.apple_mobile_web_app_status_bar_style }}{% else %}black-translucent{% endif %}">
+    <meta name="apple-mobile-web-app-title" content="{% if seo_data %}{{ seo_data.meta_tags.apple_mobile_web_app_title }}{% else %}Jake Crossman{% endif %}">
+    <meta name="apple-touch-fullscreen" content="{% if seo_data %}{{ seo_data.meta_tags.apple_touch_fullscreen }}{% else %}yes{% endif %}">
+    <meta name="mobile-web-app-capable" content="{% if seo_data %}{{ seo_data.meta_tags.mobile_web_app_capable }}{% else %}yes{% endif %}">
+    <meta name="msapplication-TileColor" content="{% if seo_data %}{{ seo_data.meta_tags.msapplication_TileColor }}{% else %}#ffd700{% endif %}">
+    <meta name="msapplication-TileImage" content="{% if seo_data %}{{ seo_data.meta_tags.msapplication_TileImage }}{% else %}{{ url_for('static', filename='favicon/mstile-150x150.png') }}{% endif %}">
+    <meta name="msapplication-config" content="{% if seo_data %}{{ seo_data.meta_tags.msapplication_config }}{% else %}{{ url_for('static', filename='favicon/browserconfig.xml') }}{% endif %}">
+      <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    
+    <!-- DNS Prefetch -->
+    {% if seo_data and seo_data.meta_tags.dns_prefetch %}
+    {% for domain in seo_data.meta_tags.dns_prefetch %}
+    <link rel="dns-prefetch" href="{{ domain }}">
+    {% endfor %}
+    {% endif %}
+    
+    <!-- Preconnect -->
+    {% if seo_data and seo_data.meta_tags.preconnect %}
+    {% for url in seo_data.meta_tags.preconnect %}
+    <link rel="preconnect" href="{{ url }}" crossorigin>
+    {% endfor %}
+    {% endif %}
+    
+    <!-- Prefetch -->
+    {% if seo_data and seo_data.meta_tags.prefetch %}
+    {% for url in seo_data.meta_tags.prefetch %}
+    <link rel="prefetch" href="{{ url }}">
+    {% endfor %}
+    {% endif %}
+    
+    <!-- Fonts with optimal loading -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-      <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- Favicon -->
+    <!-- Favicon Package -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest') }}">
+    <link rel="mask-icon" href="{{ url_for('static', filename='favicon/safari-pinned-tab.svg') }}" color="#ffd700">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
+      <!-- CSS with critical path optimization -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/seo-enhancements.css') }}">
     
-    <!-- Meta Tags -->
-    <meta name="description" content="Jake Crossman - Professional Actor based in Los Angeles, CA & Virginia. ESPN+ star, TikTok influencer with 1M+ followers, and versatile performer.">
-    <meta name="keywords" content="actor, performer, ESPN, TikTok, Los Angeles, Virginia, demo reel, portfolio">
-    <meta name="author" content="Jake Crossman">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+      <!-- Structured Data (JSON-LD) -->
+    {% if seo_data %}
+    <!-- Primary Person/Organization Schema -->
+    <script type="application/ld+json">
+    {{ seo_data.schema_markup | tojson }}
+    </script>
     
-    <!-- Open Graph -->
-    <meta property="og:title" content="{% if title %}{{ title }}{% else %}Jake Crossman - Actor{% endif %}">
-    <meta property="og:description" content="Professional Actor based in Los Angeles, CA & Virginia. ESPN+ star and TikTok influencer with 1M+ followers.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://jakecrossman.com">
+    <!-- Breadcrumb Schema -->
+    {% if seo_data.breadcrumb_schema %}
+    <script type="application/ld+json">
+    {{ seo_data.breadcrumb_schema | tojson }}
+    </script>
+    {% endif %}
+    
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {{ seo_data.organization_schema | tojson }}
+    </script>
+      <!-- Local Business Schema -->
+    <script type="application/ld+json">
+    {{ seo_data.local_business_schema | tojson }}
+    </script>
+    
+    <!-- Actor Profession Schema (2025 Enhancement) -->
+    <script type="application/ld+json">
+    {{ seo_data.actor_profession_schema | tojson }}
+    </script>
+    
+    <!-- Entertainment Organization Schema -->
+    <script type="application/ld+json">
+    {{ seo_data.entertainment_organization_schema | tojson }}
+    </script>
+    
+    <!-- Video Schema (for demo reel page) -->
+    {% if seo_data.video_schema %}
+    <script type="application/ld+json">
+    {{ seo_data.video_schema | tojson }}
+    </script>
+    {% endif %}
+    
+    <!-- FAQ Schema (if available) -->
+    {% if seo_data.faq_schema %}
+    <script type="application/ld+json">
+    {{ seo_data.faq_schema | tojson }}
+    </script>
+    {% endif %}
+    {% endif %}
+      <!-- Additional Performance Optimizations -->
+    <link rel="preload" href="{{ url_for('static', filename='css/main.css') }}" as="style">
+    <link rel="preload" href="{{ url_for('static', filename='js/main.js') }}" as="script">
+    
+    <!-- Critical Resource Preloading -->
+    {% if seo_data and seo_data.performance_hints and seo_data.performance_hints.critical_resources %}
+    {% for resource in seo_data.performance_hints.critical_resources %}
+    <link rel="preload" href="{{ resource }}" as="style">
+    {% endfor %}
+    {% endif %}
+    
+    <!-- URL Prefetching -->
+    {% if seo_data and seo_data.performance_hints and seo_data.performance_hints.prefetch_urls %}
+    {% for url in seo_data.performance_hints.prefetch_urls %}
+    <link rel="prefetch" href="{{ url }}">
+    {% endfor %}
+    {% endif %}
+    
+    <!-- Accessibility Preferences -->
+    <meta name="prefers-reduced-motion" content="{% if seo_data %}{{ seo_data.meta_tags.reduced_motion }}{% else %}reduce{% endif %}">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+      <!-- Google Analytics 4 (GA4) -->
+    {% if config.GOOGLE_ANALYTICS_ID %}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.GOOGLE_ANALYTICS_ID }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ config.GOOGLE_ANALYTICS_ID }}', {
+        'send_page_view': true,
+        'anonymize_ip': true,
+        'allow_google_signals': false,
+        'allow_ad_personalization_signals': false
+      });
+      
+      // Enhanced eCommerce for tracking portfolio views
+      gtag('event', 'page_view', {
+        'page_title': '{{ title if title else "Jake Crossman - Actor" }}',
+        'page_location': '{{ request.url if request else "" }}',
+        'content_group1': '{{ seo_data.meta_tags.section if seo_data and seo_data.meta_tags.section else "Portfolio" }}'
+      });
+    </script>
+    {% endif %}
+    
+    <!-- Google Tag Manager (Alternative to GA4) -->
+    {% if config.GOOGLE_TAG_MANAGER_ID %}
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','{{ config.GOOGLE_TAG_MANAGER_ID }}');</script>
+    {% endif %}
+    
+    <!-- Microsoft Clarity -->
+    {% if config.CLARITY_PROJECT_ID %}
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments);};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "{{ config.CLARITY_PROJECT_ID }}");
+    </script>
+    {% endif %}
+    
+    <!-- Facebook Pixel -->
+    {% if config.FACEBOOK_PIXEL_ID %}
+    <!-- Facebook Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments);};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '{{ config.FACEBOOK_PIXEL_ID }}');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id={{ config.FACEBOOK_PIXEL_ID }}&ev=PageView&noscript=1"
+    /></noscript>
+    {% endif %}
+    
+    <!-- Search Engine Verification -->
+    {% if config.GOOGLE_SEARCH_CONSOLE_VERIFICATION %}
+    <meta name="google-site-verification" content="{{ config.GOOGLE_SEARCH_CONSOLE_VERIFICATION }}">
+    {% endif %}
+    
+    {% if config.BING_VERIFICATION %}
+    <meta name="msvalidate.01" content="{{ config.BING_VERIFICATION }}">
+    {% endif %}
+    
+    {% if config.YANDEX_VERIFICATION %}
+    <meta name="yandex-verification" content="{{ config.YANDEX_VERIFICATION }}">
+    {% endif %}
+      {% if config.PINTEREST_VERIFICATION %}
+    <meta name="p:domain_verify" content="{{ config.PINTEREST_VERIFICATION }}">
+    {% endif %}
+    
+    <!-- 2025 Entertainment Industry Meta Tags -->
+    {% if seo_data %}
+    <meta name="industry" content="{{ seo_data.meta_tags.industry }}">
+    <meta name="profession" content="{{ seo_data.meta_tags.profession }}">
+    <meta name="specialization" content="{{ seo_data.meta_tags.specialization }}">
+    <meta name="experience-level" content="{{ seo_data.meta_tags.experience_level }}">
+    <meta name="union-status" content="{{ seo_data.meta_tags.union_status }}">
+    <meta name="representation-status" content="{{ seo_data.meta_tags.representation_status }}">
+    <meta name="casting-type" content="{{ seo_data.meta_tags.casting_type }}">
+    <meta name="age-range" content="{{ seo_data.meta_tags.age_range }}">
+    <meta name="type-casting" content="{{ seo_data.meta_tags.type_casting }}">
+    <meta name="performance-skills" content="{{ seo_data.meta_tags.performance_skills }}">
+    {% endif %}
 </head>
 <body>
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Google Tag Manager (noscript) -->
+    {% if config.GOOGLE_TAG_MANAGER_ID %}
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ config.GOOGLE_TAG_MANAGER_ID }}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {% endif %}
+    
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -53,12 +310,78 @@
                 <span class="bar"></span>
             </div>
         </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main-content">
+    </nav>    <!-- Main Content -->
+    <main class="main-content" id="main-content">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages" style="position: fixed; top: 100px; right: 20px; z-index: 10000;">
+            {% for category, message in messages %}
+            <div class="flash-message flash-{{ category }}" style="
+                background: {{ 'linear-gradient(135deg, #28a745, #20c997)' if category == 'success' else 'linear-gradient(135deg, #dc3545, #e85d75)' if category == 'error' else 'linear-gradient(135deg, #007bff, #0056b3)' }};
+                color: white;
+                padding: 1rem 1.5rem;
+                margin-bottom: 0.5rem;
+                border-radius: 6px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                max-width: 400px;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s ease;
+                animation: slideInFromRight 0.3s ease forwards;
+            ">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <span>{{ message }}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" style="
+                        background: none;
+                        border: none;
+                        color: white;
+                        font-size: 1.2rem;
+                        cursor: pointer;
+                        margin-left: 1rem;
+                        padding: 0;
+                        width: 20px;
+                        height: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">&times;</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <style>
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        </style>
+        <script>
+        // Auto-remove flash messages after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(message => {
+                setTimeout(() => {
+                    if (message.parentNode) {
+                        message.style.opacity = '0';
+                        message.style.transform = 'translateX(100%)';
+                        setTimeout(() => message.remove(), 300);
+                    }
+                }, 5000);
+            });
+        });
+        </script>
+        {% endif %}
+        {% endwith %}
+        
         {% block content %}{% endblock %}
-    </main>    <!-- Call to Action -->
+    </main><!-- Call to Action -->
     <section class="footer-cta">
         <div class="container">
             <div style="text-align: center;">

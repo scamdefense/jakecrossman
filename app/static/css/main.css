@@ -957,6 +957,354 @@ a {
     to { opacity: 1; }
 }
 
+/* ===== PWA UPDATE NOTIFICATION ===== */
+.update-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #000;
+    padding: 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
+    z-index: 10000;
+    max-width: 300px;
+    animation: slideInUp 0.3s ease-out;
+    font-family: 'Inter', sans-serif;
+}
+
+.notification-content {
+    padding: 20px;
+}
+
+.notification-content p {
+    margin: 0 0 15px 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.notification-content button {
+    background: #000;
+    color: #ffd700;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 8px;
+    transition: all 0.2s ease;
+}
+
+.notification-content button:hover {
+    background: #333;
+    transform: translateY(-1px);
+}
+
+.notification-content button:last-child {
+    background: transparent;
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.notification-content button:last-child:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ===== ENHANCED IMAGE LOADING ===== */
+img.lazy {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+img.loaded {
+    opacity: 1;
+}
+
+/* Image loading placeholder */
+img[data-src]:not([src]) {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+/* Critical resource hints */
+.preload-critical {
+    font-display: swap;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .update-notification {
+        animation: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .update-notification {
+        background: #ffff00;
+        color: #000000;
+        border: 2px solid #000000;
+    }
+    
+    .notification-content button {
+        background: #000000;
+        color: #ffffff;
+        border: 2px solid #ffffff;
+    }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+    img[data-src]:not([src]) {
+        background: linear-gradient(90deg, #2a2a2a 25%, #1a1a1a 50%, #2a2a2a 75%);
+        background-size: 200% 100%;
+    }
+}
+
+/* ===== ENHANCED FOCUS MANAGEMENT ===== */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #ffd700;
+    color: #000;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 10001;
+    font-weight: 600;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Focus indicators */
+*:focus {
+    outline: 2px solid #ffd700;
+    outline-offset: 2px;
+}
+
+/* Remove outline for mouse users, keep for keyboard users */
+.js-focus-visible *:focus:not(.focus-visible) {
+    outline: none;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .update-notification,
+    .nav-toggle,
+    .footer-cta,
+    script,
+    noscript {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+    
+    .hero-name,
+    .section-title {
+        color: black !important;
+    }
+    
+    a[href^="http"]:after {
+        content: " (" attr(href) ")";
+        font-size: 9pt;
+        color: #666;
+    }
+    
+    .resume-container {
+        box-shadow: none !important;
+        border: 1px solid #ccc;
+    }
+}
+
+/* ===== PWA INSTALLATION PROMPT ===== */
+.install-prompt {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    color: #ffd700;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    max-width: 300px;
+    animation: slideInLeft 0.3s ease-out;
+    display: none;
+}
+
+.install-prompt.show {
+    display: block;
+}
+
+.install-prompt h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.install-prompt p {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.install-prompt button {
+    background: #ffd700;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: all 0.2s ease;
+}
+
+.install-prompt button:hover {
+    background: #ffed4e;
+    transform: translateY(-1px);
+}
+
+.install-prompt .dismiss {
+    background: transparent;
+    color: #ffd700;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.install-prompt .dismiss:hover {
+    background: rgba(255, 215, 0, 0.1);
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ===== ENHANCED FORM STYLES ===== */
+.form-validation {
+    color: #ff4444;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.form-validation.show {
+    display: block;
+}
+
+.form-group.error input,
+.form-group.error textarea {
+    border-color: #ff4444;
+    box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.2);
+}
+
+.form-group.success input,
+.form-group.success textarea {
+    border-color: #00aa00;
+    box-shadow: 0 0 0 2px rgba(0, 170, 0, 0.2);
+}
+
+/* Form loading state */
+.form-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.form-loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+    .update-notification,
+    .install-prompt {
+        border: 1px solid;
+    }
+}
+
+/* Reduced data mode */
+@media (prefers-reduced-data: reduce) {
+    img[data-src] {
+        display: none;
+    }
+    
+    .video-background {
+        display: none;
+    }
+}
+
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
     /* Navigation Menu */
@@ -2180,3 +2528,175 @@ a {
         }
     }
 }
+
+/* ===== PWA UPDATE NOTIFICATION ===== */
+.update-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #000;
+    padding: 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
+    z-index: 10000;
+    max-width: 300px;
+    animation: slideInUp 0.3s ease-out;
+    font-family: 'Inter', sans-serif;
+}
+
+.notification-content {
+    padding: 20px;
+}
+
+.notification-content p {
+    margin: 0 0 15px 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.notification-content button {
+    background: #000;
+    color: #ffd700;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 8px;
+    transition: all 0.2s ease;
+}
+
+.notification-content button:hover {
+    background: #333;
+    transform: translateY(-1px);
+}
+
+.notification-content button:last-child {
+    background: transparent;
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.notification-content button:last-child:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ===== ENHANCED IMAGE LOADING ===== */
+img.lazy {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+img.loaded {
+    opacity: 1;
+}
+
+/* Image loading placeholder */
+img[data-src]:not([src]) {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+/* Critical resource hints */
+.preload-critical {
+    font-display: swap;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .update-notification {
+        animation: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .update-notification {
+        background: #ffff00;
+        color: #000000;
+        border: 2px solid #000000;
+    }
+    
+    .notification-content button {
+        background: #000000;
+        color: #ffffff;
+        border: 2px solid #ffffff;
+    }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+    img[data-src]:not([src]) {
+        background: linear-gradient(90deg, #2a2a2a 25%, #1a1a1a 50%, #2a2a2a 75%);
+        background-size: 200% 100%;
+    }
+}
+
+/* ===== ENHANCED FOCUS MANAGEMENT ===== */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #ffd700;
+    color: #000;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 10001;
+    font-weight: 600;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Focus indicators */
+*:focus {
+    outline: 2px solid #ffd700;
+    outline-offset: 2px;
+}
+
+/* Remove outline for mouse users, keep for keyboard users */
+.js-focus-visible *:focus:not(.focus-visible) {
+    outline: none;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .update-not
