@@ -94,16 +94,11 @@ const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // Get form data
+          // Get form data
         const formData = new FormData(this);
         const formObject = {};
         formData.forEach((value, key) => {
-            if (key === 'resume_attach') {
-                formObject[key] = document.getElementById('resume-attach').checked;
-            } else {
-                formObject[key] = value;
-            }
+            formObject[key] = value;
         });
         
         // Simple validation
