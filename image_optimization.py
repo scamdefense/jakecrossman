@@ -326,6 +326,8 @@ Run `python image_optimization.py` to update when you add new images.
         total_original_size = 0
         total_webp_size = 0
         total_optimized_size = 0
+        total_webp_savings = 0
+        total_opt_savings = 0
         webp_count = 0
         optimized_count = 0
         error_count = 0
@@ -347,6 +349,16 @@ Run `python image_optimization.py` to update when you add new images.
 
             if results["errors"]:
                 error_count += 1
+
+        # Calculate overall savings
+        if total_webp_size > 0:
+            total_webp_savings = self.calculate_savings(
+                total_original_size, total_webp_size
+            )
+        if total_optimized_size > 0:
+            total_opt_savings = self.calculate_savings(
+                total_original_size, total_optimized_size
+            )
 
         # Create usage examples
         self.create_usage_examples()
@@ -370,12 +382,12 @@ Run `python image_optimization.py` to update when you add new images.
             if total_webp_size > 0:
                 print(
                     f"WebP total: {total_webp_size:.2f} MB "
-                    "({total_webp_savings:.1f}% savings)"
+                    f"({total_webp_savings:.1f}% savings)"
                 )
             if total_optimized_size > 0:
                 print(
                     f"Optimized total: {total_optimized_size:.2f} MB "
-                    "({total_opt_savings:.1f}% savings)"
+                    f"({total_opt_savings:.1f}% savings)"
                 )
 
         print(f"\nOptimized files location: {self.optimized_dir}")

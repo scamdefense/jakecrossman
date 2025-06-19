@@ -1,6 +1,11 @@
+import sys
+import os
 import pytest
 from app import create_app
+from pathlib import Path
 
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 @pytest.fixture
 def app():
