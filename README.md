@@ -34,6 +34,11 @@ Build and run with Docker:
 docker build -t actor-portfolio .
 docker run -p 5000:5000 actor-portfolio
 ```
+
+## Citation
+
+To cite this project, please use the metadata provided in [CITATION.cff](CITATION.cff).
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
