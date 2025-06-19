@@ -75,6 +75,7 @@ Your SEO implementation is **FLAWLESS** for an actor's portfolio in 2025. Google
 ### **Career Highlights**
 - **ESPN+ "Fuse"** - Sports comedy series (2023)
 - **"Continue to Win"** - Independent pilot directed by Lester Speight (2025)
+- **"F1 The Movie"** - Feature film cardistry consultant (2025)
 - **Digital Content Creator** with massive social media reach
 - **Theater Experience** - Erie Community Theater lead roles
 

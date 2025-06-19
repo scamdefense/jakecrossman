@@ -599,6 +599,14 @@ def news_sitemap():
     # Sample news articles - in production, this would come from a database
     news_articles = [
         {
+            "url": "/news#f1-the-movie",
+            "title": "Cardistry Consultant on F1 The Movie",
+            "publication_date": "2025-09-01T00:00:00Z",
+            "keywords": (
+                "Jake Crossman, F1 The Movie, cardistry consultant, Joseph Kosinski"
+            ),
+        },
+        {
             "url": "/news#continue-to-win",
             "title": "Continue to Win Pilot Wraps Production",
             "publication_date": "2025-06-01T00:00:00Z",
