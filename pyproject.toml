@@ -8,17 +8,17 @@ version = "1.0.0"
 description = "Personal portfolio website for Jake Crossman"
 authors = [{name = "Jake Crossman"}]
 dependencies = [
-    "Flask==2.3.3",
-    "gunicorn==21.2.0",
+    "Flask==3.1.1",
+    "gunicorn==23.0.0",
 ]
 requires-python = ">=3.9"
 
 [project.optional-dependencies]
 dev = [
-    "pytest==7.4.2",
-    "black==23.9.1",
-    "flake8==6.1.0",
-    "pre-commit==3.4.0",
+    "pytest==8.4.1",
+    "black==25.1.0",
+    "flake8==7.2.0",
+    "pre-commit==4.2.0",
 ]
 
 [tool.black]
