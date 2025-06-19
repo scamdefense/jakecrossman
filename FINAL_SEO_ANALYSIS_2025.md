@@ -76,6 +76,7 @@ Your SEO implementation is **OUTSTANDING** for an actor's portfolio. Here's why 
 - **ESPN+** series "Fuse" (Executive Producer/Talent)
 - **1M+ TikTok** followers (@usamedical)
 - **Independent film** "Continue to Win" (Lead Antagonist)
+- **Feature film** "F1 The Movie" (Cardistry Consultant)
 - **Theater awards** (Best Lead Actor)
 
 ### **Skills & Services**

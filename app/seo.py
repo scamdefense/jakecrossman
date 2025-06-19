@@ -898,6 +898,13 @@ def generate_actor_profession_schema() -> Dict:
                 "datePublished": "2025",
                 "genre": ["Drama", "Sports"],
             },
+            {
+                "@type": "Movie",
+                "name": "F1 The Movie",
+                "description": "Feature film directed by Joseph Kosinski",
+                "datePublished": "2025",
+                "genre": ["Action", "Sports"],
+            },
         ],
     }
 
