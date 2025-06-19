@@ -1,11 +1,11 @@
-import os
 import sys
+import os
+import pytest
+from app import create_app
+from pathlib import Path
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-import pytest  # noqa: E402
-from app import create_app  # noqa: E402
-
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 @pytest.fixture
 def app():
