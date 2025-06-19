@@ -8,10 +8,12 @@ from flask import (
     flash,
     redirect,
     jsonify,
+    send_from_directory,
 )
 from app.main import bp
 from app.seo import get_page_seo_data, SEOConfig
 from app.email_utils import send_contact_email
+from werkzeug.utils import safe_join
 import os
 import xml.etree.ElementTree as ET
 from datetime import datetime
@@ -469,13 +471,13 @@ Host: {SEOConfig.SITE_URL.replace('https://', '').replace('http://', '')}
     return response
 
 
-@bp.route("/video/<filename>")
+@bp.route("/video/<path:filename>")
 def serve_video(filename):
     """Serve video files with proper range request support for streaming."""
     video_dir = os.path.join(current_app.static_folder, "videos")
-    file_path = os.path.join(video_dir, filename)
+    file_path = safe_join(video_dir, filename)
 
-    if not os.path.exists(file_path):
+    if file_path is None or not os.path.isfile(file_path):
         return "Video not found", 404
 
     file_size = os.path.getsize(file_path)
@@ -525,26 +527,8 @@ def serve_video(filename):
             range_header = None
 
     if not range_header:
-        # Regular request - serve the entire file with proper headers
-        def generate():
-            with open(file_path, "rb") as f:
-                # Stream in 1MB chunks for better performance
-                while True:
-                    chunk = f.read(1048576)  # 1MB chunks
-                    if not chunk:
-                        break
-                    yield chunk
-
-        response = Response(
-            generate(),
-            200,
-            headers={
-                "Content-Type": "video/mp4",
-                "Content-Length": str(file_size),
-                "Accept-Ranges": "bytes",
-                "Cache-Control": "public, max-age=3600",
-            },
-        )
+        response = send_from_directory(video_dir, filename, conditional=True)
+        response.headers.setdefault("Cache-Control", "public, max-age=3600")
         return response
 
 

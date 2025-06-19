@@ -6,8 +6,8 @@ A Flask-based portfolio website for showcasing theatrical work and performances.
 
 1. Create virtual environment:
    ```bash
-   python -m venv venv
-   venv\Scripts\activate
+   python3.12 -m venv venv
+   source venv/bin/activate
    ```
 
 2. Install dependencies:
@@ -17,7 +17,7 @@ A Flask-based portfolio website for showcasing theatrical work and performances.
 
 3. Run the application:
    ```bash
-   python app.py
+   python3.12 app.py
    ```
 
 ## Development
@@ -38,3 +38,7 @@ docker run -p 5000:5000 actor-portfolio
 ## Citation
 
 To cite this project, please use the metadata provided in [CITATION.cff](CITATION.cff).
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
