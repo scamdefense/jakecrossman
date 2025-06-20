@@ -44,6 +44,16 @@ app = create_app("production")
 
 Without an argument, the development configuration is used.
 
+### Caching
+
+The application uses **Flask-Caching**. By default a simple in-memory cache is
+configured. To disable caching, set `CACHE_TYPE=null` in your environment or
+configuration object.
+
+When `ENABLE_CACHE_HEADERS` is enabled, responses under `/static` include a
+`Cache-Control` header using the timeout defined by `STATIC_CACHE_TIMEOUT` (in
+seconds).
+
 ## Dependencies
 
 The project relies on the following Python packages for HTTP requests and HTML parsing:

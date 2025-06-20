@@ -129,3 +129,14 @@ def test_unknown_page(client):
     response = client.get("/does-not-exist")
     assert response.status_code == 404
     assert b"Page Not Found" in response.data
+
+
+def test_static_cache_headers(client):
+    """Static files should include cache headers when enabled."""
+    client.application.config.update({
+        "ENABLE_CACHE_HEADERS": True,
+        "STATIC_CACHE_TIMEOUT": 123,
+    })
+    response = client.get("/static/robots.txt")
+    assert response.status_code == 200
+    assert response.headers["Cache-Control"] == "public, max-age=123"
