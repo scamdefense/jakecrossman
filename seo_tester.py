@@ -347,6 +347,11 @@ def main():
         help="Base URL to test (default: http://localhost:5000)",
     )
     parser.add_argument("--page", help="Test specific page only")
+    parser.add_argument(
+        "--json-output",
+        metavar="FILE",
+        help="Write raw results to FILE in JSON format",
+    )
 
     args = parser.parse_args()
 
@@ -355,11 +360,20 @@ def main():
     if args.page:
         print(f"Testing single page: {args.page}")
         success = tester.test_page(args.page)
-        tester.print_results()
-        sys.exit(0 if success else 1)
     else:
         success = tester.run_all_tests()
-        sys.exit(0 if success else 1)
+
+    tester.print_results()
+
+    if args.json_output:
+        try:
+            with open(args.json_output, "w") as f:
+                json.dump(tester.results, f, indent=2)
+            print(f"Results written to {args.json_output}")
+        except OSError as e:
+            print(f"Failed to write results file: {e}", file=sys.stderr)
+
+    sys.exit(0 if success else 1)
 
 
 if __name__ == "__main__":
