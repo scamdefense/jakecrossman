@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_wtf import CSRFProtect
 import os
 from dotenv import load_dotenv
@@ -43,5 +43,10 @@ def create_app(config_name="default"):
     from app.main import bp as main_bp
 
     app.register_blueprint(main_bp)
+
+    @app.errorhandler(404)
+    def page_not_found(error):
+        """Render custom 404 page."""
+        return render_template("404.html"), 404
 
     return app

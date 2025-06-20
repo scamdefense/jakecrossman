@@ -37,3 +37,10 @@ def test_video_encoded_traversal(client):
     """Encoded path traversal should also be blocked."""
     response = client.get("/video/..%2F..%2Fetc/passwd")
     assert response.status_code == 404
+
+
+def test_unknown_page(client):
+    """Requesting an unknown page should return custom 404 template."""
+    response = client.get("/does-not-exist")
+    assert response.status_code == 404
+    assert b"Page Not Found" in response.data
