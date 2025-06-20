@@ -5,8 +5,7 @@
 <section class="news-hero">
     <div class="container">
         <h1 class="section-title">News & Updates</h1>
-        <p style="font-size: 1.2rem; color: #cccccc; max-width: 600px; margin: 0 auto;">Stay up to date with the latest projects,
-            press coverage, and career milestones.</p>
+        <p style="font-size: 1.2rem; color: #cccccc; max-width: 600px; margin: 0 auto;">Stay up to date with the latest projects, press coverage, and career milestones.</p>
     </div>
 </section>
 
@@ -14,167 +13,14 @@
 <section class="section">
     <div class="container">
         <div class="news-grid">
-            <!-- Feature Film Consulting -->
-            <article class="news-item" id="f1-the-movie">
-                <div class="news-date">September 2025</div>
-                <h3 class="news-title">Cardistry Consultant on F1 The Movie</h3>
-                <div class="news-content">
-                    <p>Thrilled to join director Joseph Kosinski on the high-octane feature <em>F1 The Movie</em> as a cardistry consultant. Filming in Northamptonshire, England has been an incredible experience, blending sleight of hand with big-screen storytelling.</p>
-                    <p><strong>Role:</strong> Cardistry Consultant<br>
-                    <strong>Location:</strong> Northamptonshire, England, UK<br>
-                    <strong>Status:</strong> Production</p>
-                </div>
+            {% for entry in entries %}
+            <article class="news-item" id="{{ entry.slug }}">
+                {% if entry.date %}<div class="news-date">{{ entry.date }}</div>{% endif %}
+                <h3 class="news-title">{{ entry.title }}</h3>
+                <div class="news-content">{{ entry.content|safe }}</div>
             </article>
-            <!-- Recent Project -->
-            <article class="news-item">
-                <div class="news-date">June 2025</div>
-                <h3 class="news-title">Continue to Win Pilot Wraps Production</h3>
-                <div class="news-content">
-                    <p>Just wrapped filming on the independent pilot "Continue to Win" where I was featured as Trent, the Rival Running Back antagonist,
-                        a complex football player character. The intense dramatic scenes pushed my range and allowed me to
-                        showcase both physical and emotional depth. Excited to share this project with audiences soon.</p>
-                    <p><strong>Role:</strong> Lead Antagonist<br>
-                    <strong>Genre:</strong> Drama/Sports<br>
-                    <strong>Status:</strong> Post-Production</p>
-                </div>
-            </article>
-
-            <!-- TikTok Milestone -->
-            <article class="news-item">
-                <div class="news-date">January 2024</div>
-                <h3 class="news-title">TikTok Reaches 1 Million Followers Milestone</h3>
-                <div class="news-content">
-                    <p>Thrilled to announce that my TikTok (@usamedical) has officially reached 1 million followers with over
-                        250 million total views! This digital platform has become an incredible way to connect with audiences
-                        and showcase different aspects of my personality and performance skills.</p>
-                    <p><strong>Platform:</strong> TikTok (@usamedical)<br>
-                    <strong>Followers:</strong> 1M+<br>
-                    <strong>Total Views:</strong> 250M+</p>
-                </div>
-            </article>
-
-            <!-- ESPN+ Success -->
-            <article class="news-item">
-                <div class="news-date">March 2019</div>
-                <h3 class="news-title">ESPN+ "Fuse" Reaches 100K+ Viewers Per Episode</h3>
-                <div class="news-content">
-                    <p>Our sports-comedy series "<a href="https://www.liberty.edu/champion/2019/02/18/liberty-university-starts-new-student-run-television-show-called-fuse/?utm_source=chatgpt.com" target="_blank" rel="noopener">Fuse</a>" on ESPN+ has been a tremendous success, consistently drawing over 100,000
-                        viewers per episode. As Executive Producer and on-camera talent, I've had the opportunity to blend my athletic
-                        background with comedy writing and performance.</p>
-                    <p style="margin-top: 1rem;"><a href="https://www.liberty.edu/champion/2019/02/18/liberty-university-starts-new-student-run-television-show-called-fuse/?utm_source=chatgpt.com" target="_blank" rel="noopener" class="btn btn-primary">Read Press Article</a></p>
-                    <p><strong>Platform:</strong> ESPN+<br>
-                    <strong>Episodes:</strong> 6 (Season 1)<br>
-                    <strong>Role:</strong> Executive Producer/On-Camera Talent</p>
-                </div>
-            </article>
-
-            <!-- Theater Recognition -->
-            <article class="news-item">
-                <div class="news-date">May 2017</div>
-                <h3 class="news-title">Erie Community Theater "Best Lead Actor" Award</h3>
-                <div class="news-content">
-                    <p>Honored to receive the "Best Lead Actor" award from Erie Community Theater for my performance as Fagin
-                        in "Oliver Twist." This recognition from the local theater community meant so much, especially as it was
-                        one of my first major lead roles in classical theater.</p>
-                    <p><strong>Production:</strong> Oliver Twist<br>
-                    <strong>Role:</strong> Fagin<br>
-                    <strong>Venue:</strong> Warner Theater, Erie</p>
-                </div>
-            </article>
-
+            {% endfor %}
         </div>
     </div>
 </section>
-
-<!-- Press Releases -->
-<section class="section" style="background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.1);">
-    <div class="container">
-        <h2 class="section-title">Press Releases</h2>
-        <div class="news-grid">
-            <article class="news-item">
-                <div class="news-date">February 18, 2019</div>
-                <h3 class="news-title">Liberty University Launches FUSE</h3>
-                <div class="news-content">
-                    <p>The Liberty Champion announced the start of the student-run television show <em>FUSE</em>, highlighting its unique approach to sports and comedy.</p>
-                    <p style="margin-top: 1rem;"><a href="https://www.liberty.edu/champion/2019/02/18/liberty-university-starts-new-student-run-television-show-called-fuse/?utm_source=chatgpt.com" target="_blank" rel="noopener" class="btn btn-primary">Read Full Release</a></p>
-                </div>
-            </article>
-        </div>
-    </div>
-</section>
-
-<!-- Upcoming Projects -->
-<section class="section" style="background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.1);">
-    <div class="container">
-        <h2 class="section-title">Upcoming Projects</h2>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
-            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 2rem; border-left: 4px solid #ffd700;">
-                <h4 style="color: #ffd700; margin-bottom: 1rem;">
-                    <i class="fas fa-calendar-alt"></i> In Development
-                </h4>
-                <h3 style="color: #ffffff; margin-bottom: 1rem;">New Projects Coming Soon</h3>
-                <p style="color: #cccccc; margin-bottom: 1rem;">Currently in discussions for several exciting film and television
-                    opportunities. Stay tuned for official announcements!</p>
-                <p style="color: #999999; font-size: 0.9rem; margin: 0;">
-                    <strong>Status:</strong> Pre-Production<br>
-                    <strong>Timeline:</strong> Summer/Fall 2025
-                </p>
-            </div>
-            
-            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 2rem; border-left: 4px solid #ffd700;">
-                <h4 style="color: #ffd700; margin-bottom: 1rem;">
-                    <i class="fas fa-video"></i> Content Creation
-                </h4>
-                <h3 style="color: #ffffff; margin-bottom: 1rem;">Expanding Digital Presence</h3>
-                <p style="color: #cccccc; margin-bottom: 1rem;">Developing new content formats and exploring brand partnerships
-                    while maintaining the authentic voice that resonates with my audience.</p>
-                <p style="color: #999999; font-size: 0.9rem; margin: 0;">
-                    <strong>Platforms:</strong> TikTok, Instagram, YouTube<br>
-                    <strong>Focus:</strong> Health, Wellness, Entertainment
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Blog/Personal Updates -->
-<section class="section" style="background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.1);">
-    <div class="container">
-        <h2 class="section-title">Behind the Scenes</h2>
-        
-        <div class="news-grid">
-            <article class="news-item">
-                <div class="news-date">May 2025</div>
-                <h3 class="news-title">Training Update: Advanced Scene Study Workshop</h3>
-                <div class="news-content">
-                    <p>Just completed an intensive advanced scene study workshop focusing on method acting techniques. It's
-                        incredible how continuous learning keeps pushing the boundaries of what's possible in performance.
-                        The vulnerability required for authentic character work never gets easier, but it gets more rewarding.</p>
-                </div>
-            </article>
-
-            <article class="news-item">
-                <div class="news-date">April 2025</div>
-                <h3 class="news-title">Balancing Digital and Traditional Media</h3>
-                <div class="news-content">
-                    <p>Reflecting on the unique position of being both a traditional actor and digital influencer. The skills
-                        translate beautifully between platforms – authenticity, timing, and connecting with your audience are
-                        universal. Each medium informs and strengthens the other.</p>
-                </div>
-            </article>
-
-            <article class="news-item">
-                <div class="news-date">March 2025</div>
-                <h3 class="news-title">Audition Success: Lessons Learned</h3>
-                <div class="news-content">
-                    <p>Recently booked a role after several rounds of callbacks, and it got me thinking about the audition
-                        process. Each 'no' really does lead you closer to the right 'yes.' The key is staying authentic to your
-                        interpretation while being flexible enough to take direction.</p>
-                </div>
-            </article>
-        </div>
-    </div>
-</section>
-
 {% endblock %}

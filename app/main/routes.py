@@ -16,6 +16,8 @@ from app.email_utils import send_contact_email
 from app.forms import ContactForm
 from app import csrf
 from werkzeug.utils import safe_join
+from pathlib import Path
+from app.content_loader import load_markdown_entries
 import os
 import xml.etree.ElementTree as ET
 from datetime import datetime
@@ -69,26 +71,33 @@ def resume():
 @bp.route("/gallery")
 def gallery():
     """Gallery page route."""
-    # Get list of gallery images for schema
+    gallery_dir = Path(current_app.root_path).parent / "content" / "gallery"
+    gallery_entries = load_markdown_entries(gallery_dir)
     gallery_images = [
-        f"{SEOConfig.SITE_URL}/static/images/headshot-{i}.jpg" for i in range(1, 9)
+        f"{SEOConfig.SITE_URL}/static/images/{e['image']}.jpg"
+        for e in gallery_entries
+        if e["image"]
     ]
     seo_data = get_page_seo_data("gallery", images=gallery_images)
     return render_template(
         "gallery.html",
         title="Jake Crossman Gallery - Professional Headshots",
         seo_data=seo_data,
+        entries=gallery_entries,
     )
 
 
 @bp.route("/news")
 def news():
     """News and updates page route."""
+    news_dir = Path(current_app.root_path).parent / "content" / "news"
+    news_entries = load_markdown_entries(news_dir)
     seo_data = get_page_seo_data("news")
     return render_template(
         "news.html",
         title="Jake Crossman News & Updates - Latest Projects & Blog",
         seo_data=seo_data,
+        entries=news_entries,
     )
 
 
@@ -571,43 +580,23 @@ def smart_img(image_name, formats=None):
 def news_sitemap():
     """Generate news sitemap for the blog/news section."""
 
-    # Sample news articles - in production, this would come from a database
-    news_articles = [
-        {
-            "url": "/news#f1-the-movie",
-            "title": "Cardistry Consultant on F1 The Movie",
-            "publication_date": "2025-09-01T00:00:00Z",
-            "keywords": (
-                "Jake Crossman, F1 The Movie, cardistry consultant, Joseph Kosinski"
-            ),
-        },
-        {
-            "url": "/news#continue-to-win",
-            "title": "Continue to Win Pilot Wraps Production",
-            "publication_date": "2025-06-01T00:00:00Z",
-            "keywords": (
-                "Jake Crossman, Continue to Win, independent film, "
-                "acting, Trent Harlen"
-            ),
-        },
-        {
-            "url": "/news#espn-fuse",
-            "title": "ESPN+ FUSE Sketch Comedy Series Launch",
-            "publication_date": "2019-08-01T00:00:00Z",
-            "keywords": (
-                "Jake Crossman, ESPN, FUSE, sketch comedy, " "executive producer"
-            ),
-        },
-        {
-            "url": "/news#tiktok-milestone",
-            "title": "Reaching 1 Million TikTok Followers",
-            "publication_date": "2024-03-01T00:00:00Z",
-            "keywords": (
-                "Jake Crossman, TikTok, social media, digital content, "
-                "1 million followers"
-            ),
-        },
-    ]
+    news_dir = Path(current_app.root_path).parent / "content" / "news"
+    entries = load_markdown_entries(news_dir)
+    news_articles = []
+    for entry in entries:
+        publication_date = (
+            f"{entry['date']}T00:00:00Z"
+            if entry.get("date")
+            else datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+        )
+        news_articles.append(
+            {
+                "url": f"/news#{entry['slug']}",
+                "title": entry["title"],
+                "publication_date": publication_date,
+                "keywords": f"Jake Crossman, {entry['title']}",
+            }
+        )
 
     # Create XML structure
     urlset = ET.Element("urlset")
