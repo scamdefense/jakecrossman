@@ -20,6 +20,14 @@ A Flask-based portfolio website for showcasing theatrical work and performances.
    python3.12 app.py
    ```
 
+## Dependencies
+
+The project relies on the following Python packages for HTTP requests and HTML parsing:
+
+- `requests`
+- `beautifulsoup4`
+- `lxml` (used by Beautiful Soup for faster parsing)
+
 ## Development
 
 - Run tests: `pytest`

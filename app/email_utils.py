@@ -54,6 +54,12 @@ def create_email_body(form_data):
     message = form_data.get("message", "Not provided")
     resume_attach = form_data.get("resume_attach", False)
 
+    professional_materials = (
+        '<p><strong>Professional Materials Package Requested:</strong> "Yes"</p>'
+        if resume_attach
+        else ""
+    )
+
     html_body = f"""
     <h2>New Contact Form Submission</h2>
     <p><strong>Name:</strong> {name}</p>
@@ -62,8 +68,7 @@ def create_email_body(form_data):
     <p><strong>Role/Opportunity:</strong> {role}</p>
     <p><strong>Timeline:</strong> {timeline}</p>
     <p><strong>Message:</strong> {message}</p>
-    {f'<p><strong>Professional Materials Package Requested:</strong> '
-     f'"Yes</p>' if resume_attach else ''}
+    {professional_materials}
     """
 
     return html_body

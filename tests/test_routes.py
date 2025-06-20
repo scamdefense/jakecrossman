@@ -38,7 +38,6 @@ def test_video_encoded_traversal(client):
     response = client.get("/video/..%2F..%2Fetc/passwd")
     assert response.status_code == 404
 
-
 def test_sitemap_xml(client):
     """Ensure the main sitemap is reachable and XML is returned."""
     response = client.get("/sitemap.xml")
@@ -72,3 +71,9 @@ def test_robots_txt(client):
     response = client.get("/robots.txt")
     assert response.status_code == 200
     assert response.headers["Content-Type"].startswith("text/plain")
+
+def test_unknown_page(client):
+    """Requesting an unknown page should return custom 404 template."""
+    response = client.get("/does-not-exist")
+    assert response.status_code == 404
+    assert b"Page Not Found" in response.data
