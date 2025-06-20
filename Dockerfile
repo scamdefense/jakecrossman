@@ -3,7 +3,7 @@ FROM python:3.12-slim AS builder
 
 WORKDIR /app
 
-# Install all dependencies
+# Install all dependencies including scraping libraries
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -20,7 +20,7 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install runtime dependencies
+# Install runtime dependencies including scraping libraries
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 

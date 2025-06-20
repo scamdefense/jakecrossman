@@ -109,7 +109,9 @@ def contact():
                     jsonify(
                         {
                             "success": False,
-                            "message": f"Missing required fields: {', '.join(missing_fields)}",
+                            "message": (
+                                "Missing required fields: " + ", ".join(missing_fields)
+                            ),
                         }
                     ),
                     400,
@@ -133,14 +135,20 @@ def contact():
                 return jsonify(
                     {
                         "success": True,
-                        "message": "Thank you for your message! I will get back to you soon.",
+                        "message": (
+                            "Thank you for your message! "
+                            "I will get back to you soon."
+                        ),
                     }
                 )
             return (
                 jsonify(
                     {
                         "success": False,
-                        "message": "Sorry, there was an error sending your message. Please try again or contact me directly.",
+                        "message": (
+                            "Sorry, there was an error sending your message. "
+                            "Please try again or contact me directly."
+                        ),
                     }
                 ),
                 500,
@@ -156,7 +164,10 @@ def contact():
                 )
             else:
                 flash(
-                    "Sorry, there was an error sending your message. Please try again or contact me directly.",
+                    (
+                        "Sorry, there was an error sending your message. "
+                        "Please try again or contact me directly."
+                    ),
                     "error",
                 )
             return redirect(url_for("main.contact"))
