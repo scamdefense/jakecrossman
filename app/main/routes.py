@@ -14,6 +14,7 @@ from app.main import bp
 from app.seo import get_page_seo_data, SEOConfig
 from app.email_utils import send_contact_email
 from app.forms import ContactForm
+from app import csrf
 from werkzeug.utils import safe_join
 import os
 import xml.etree.ElementTree as ET
@@ -92,6 +93,7 @@ def news():
 
 
 @bp.route("/contact", methods=["GET", "POST"])
+@csrf.exempt
 def contact():
     """Contact page route."""
     form = ContactForm()

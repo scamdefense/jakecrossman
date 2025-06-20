@@ -20,6 +20,56 @@ def test_contact_page(client):
     assert b'name="csrf_token"' in response.data
 
 
+def test_contact_post_json_success(client, monkeypatch):
+    """Posting valid JSON should schedule an email and return success."""
+
+    called = {}
+
+    def fake_submit(func, *args, **kwargs):
+        called["submitted"] = True
+        # execute synchronously for test determinism
+        func(*args, **kwargs)
+
+    monkeypatch.setattr("app.email_utils.executor.submit", fake_submit)
+
+    # provide minimal email configuration on the flask app
+    client.application.config.update(
+        {
+            "SMTP_SERVER": "smtp.test",
+            "SMTP_PORT": 587,
+            "MAIL_USERNAME": "user",
+            "MAIL_PASSWORD": "pass",
+            "EMAIL_FROM": "from@test",
+            "EMAIL_TO": "to@test",
+        }
+    )
+
+    payload = {"name": "Test", "email": "a@b.com", "message": "hi"}
+    response = client.post("/contact", json=payload)
+
+    assert response.status_code == 200
+    assert response.get_json()["success"] is True
+    assert called.get("submitted") is True
+
+
+def test_contact_post_json_missing(client):
+    """Missing required fields should return 400."""
+
+    payload = {"name": "Test", "email": "", "message": ""}
+    response = client.post("/contact", json=payload)
+    assert response.status_code == 400
+    assert response.get_json()["success"] is False
+
+
+def test_contact_post_json_invalid_email(client):
+    """Invalid email format should be rejected."""
+
+    payload = {"name": "Test", "email": "invalid", "message": "hi"}
+    response = client.post("/contact", json=payload)
+    assert response.status_code == 400
+    assert response.get_json()["success"] is False
+
+
 def test_video_valid(client):
     """Valid video request should return the file."""
     response = client.get("/video/demo-reel.mp4")
