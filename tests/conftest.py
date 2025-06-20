@@ -1,9 +1,10 @@
 import sys
-import pytest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from app import create_app
+
+from app import create_app  # noqa: E402
+import pytest  # noqa: E402
 
 
 @pytest.fixture
