@@ -17,6 +17,7 @@ def test_contact_page(client):
     response = client.get("/contact")
     assert response.status_code == 200
     assert b"Get In Touch" in response.data
+    assert b'name="csrf_token"' in response.data
 
 
 def test_video_valid(client):
