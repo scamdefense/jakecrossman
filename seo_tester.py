@@ -4,7 +4,7 @@ SEO Testing and Validation Script for Jake Crossman Acting Portfolio
 Tests all SEO implementations and provides recommendations
 """
 
-import requests
+import requests  # type: ignore[import-untyped]
 import json
 import time
 import sys

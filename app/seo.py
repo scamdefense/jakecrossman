@@ -2,7 +2,7 @@
 """SEO utilities and configuration for Jake Crossman's acting portfolio."""
 
 from flask import request
-from typing import Dict, List
+from typing import Any, Dict, List
 
 
 class SEOConfig:
@@ -115,7 +115,7 @@ class SEOConfig:
     }
 
 
-def generate_page_schema(page_type: str, **kwargs) -> Dict:
+def generate_page_schema(page_type: str, **kwargs: Any) -> Dict[str, Any]:
     """Generate JSON-LD schema markup for different page types."""
 
     base_schema = {
@@ -127,7 +127,10 @@ def generate_page_schema(page_type: str, **kwargs) -> Dict:
         "description": SEOConfig.PERSON_INFO["description"],
         "url": SEOConfig.SITE_URL,
         "sameAs": list(SEOConfig.SOCIAL_PROFILES.values()),
-        "address": {"@type": "PostalAddress", **SEOConfig.PERSON_INFO["address"]},
+        "address": {
+            "@type": "PostalAddress",
+            **SEOConfig.PERSON_INFO["address"],  # type: ignore[dict-item]
+        },
         "contactPoint": {
             "@type": "ContactPoint",
             "email": SEOConfig.SOCIAL_PROFILES["email"],
@@ -166,7 +169,7 @@ def generate_page_schema(page_type: str, **kwargs) -> Dict:
             {
                 "@type": ["Person", "PerformingArtist", "Resume"],
                 "hasCredential": [
-                    {
+                    {  # type: ignore[list-item]
                         "@type": "EducationalOccupationalCredential",
                         "credentialCategory": "degree",
                         "educationalLevel": "Bachelor's",
@@ -220,7 +223,7 @@ def generate_page_schema(page_type: str, **kwargs) -> Dict:
     return base_schema
 
 
-def generate_meta_tags(page_data: Dict) -> Dict:
+def generate_meta_tags(page_data: Dict[str, Any]) -> Dict[str, Any]:
     """Generate comprehensive meta tags for a page with 2025 best practices."""
 
     title = page_data.get("title", SEOConfig.DEFAULT_TITLE)
@@ -335,17 +338,17 @@ def generate_meta_tags(page_data: Dict) -> Dict:
     }
 
 
-def generate_breadcrumb_schema(breadcrumbs: List[Dict]) -> Dict:
+def generate_breadcrumb_schema(breadcrumbs: List[Dict[str, str]]) -> Dict[str, Any]:
     """Generate breadcrumb schema markup."""
-
+    item_list: List[Dict[str, Any]] = []
     breadcrumb_list = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        "itemListElement": [],
+        "itemListElement": item_list,
     }
 
     for i, crumb in enumerate(breadcrumbs):
-        breadcrumb_list["itemListElement"].append(
+        item_list.append(
             {
                 "@type": "ListItem",
                 "position": i + 1,
@@ -357,7 +360,7 @@ def generate_breadcrumb_schema(breadcrumbs: List[Dict]) -> Dict:
     return breadcrumb_list
 
 
-def generate_organization_schema() -> Dict:
+def generate_organization_schema() -> Dict[str, Any]:
     """Generate organization schema for the website."""
 
     return {
@@ -376,7 +379,7 @@ def generate_organization_schema() -> Dict:
     }
 
 
-def generate_local_business_schema() -> Dict:
+def generate_local_business_schema() -> Dict[str, Any]:
     """Generate LocalBusiness schema markup for acting services."""
 
     return {
@@ -424,7 +427,9 @@ def generate_local_business_schema() -> Dict:
     }
 
 
-def generate_creative_work_schema(work_type: str, work_data: Dict) -> Dict:
+def generate_creative_work_schema(
+    work_type: str, work_data: Dict[str, Any]
+) -> Dict[str, Any]:
     """Generate schema for creative works (films, shows, etc.)."""
 
     base_schema = {
@@ -450,7 +455,7 @@ def generate_creative_work_schema(work_type: str, work_data: Dict) -> Dict:
     return base_schema
 
 
-def generate_faq_schema(faqs: List[Dict]) -> Dict:
+def generate_faq_schema(faqs: List[Dict[str, str]]) -> Dict[str, Any]:
     """Generate FAQ schema markup."""
 
     return {
@@ -467,7 +472,7 @@ def generate_faq_schema(faqs: List[Dict]) -> Dict:
     }
 
 
-def generate_review_schema(reviews: List[Dict]) -> Dict:
+def generate_review_schema(reviews: List[Dict[str, Any]]) -> Dict[str, Any]:
     """Generate review/testimonial schema markup."""
 
     return {
@@ -491,7 +496,7 @@ def generate_review_schema(reviews: List[Dict]) -> Dict:
     }
 
 
-def generate_video_schema(video_data: Dict) -> Dict:
+def generate_video_schema(video_data: Dict[str, Any]) -> Dict[str, Any]:
     """Generate VideoObject schema for demo reels and acting clips."""
 
     return {
@@ -528,7 +533,7 @@ def generate_video_schema(video_data: Dict) -> Dict:
     }
 
 
-def generate_article_schema(article_data: Dict) -> Dict:
+def generate_article_schema(article_data: Dict[str, Any]) -> Dict[str, Any]:
     """Generate Article schema for blog posts/news."""
 
     return {
@@ -559,9 +564,9 @@ def generate_article_schema(article_data: Dict) -> Dict:
     }
 
 
-def get_page_seo_data(page_name: str, **kwargs) -> Dict:
+def get_page_seo_data(page_name: str, **kwargs: Any) -> Dict[str, Any]:
     """Get complete SEO data for a specific page."""
-    page_configs = {
+    page_configs: Dict[str, Dict[str, Any]] = {
         "index": {
             "title": ("Jake Crossman - Professional Actor | " "Los Angeles & Virginia"),
             "description": (
@@ -802,7 +807,7 @@ def get_page_seo_data(page_name: str, **kwargs) -> Dict:
     }
 
 
-def generate_actor_profession_schema() -> Dict:
+def generate_actor_profession_schema() -> Dict[str, Any]:
     """Generate advanced actor profession schema for 2025 entertainment industry SEO."""
 
     return {
@@ -909,7 +914,7 @@ def generate_actor_profession_schema() -> Dict:
     }
 
 
-def generate_entertainment_organization_schema() -> Dict:
+def generate_entertainment_organization_schema() -> Dict[str, Any]:
     """Generate entertainment industry organization schema."""
 
     return {
