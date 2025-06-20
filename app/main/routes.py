@@ -13,6 +13,7 @@ from flask import (
 from app.main import bp
 from app.seo import get_page_seo_data, SEOConfig
 from app.email_utils import send_contact_email
+from app.forms import ContactForm
 from werkzeug.utils import safe_join
 import os
 import xml.etree.ElementTree as ET
@@ -93,42 +94,29 @@ def news():
 @bp.route("/contact", methods=["GET", "POST"])
 def contact():
     """Contact page route."""
+    form = ContactForm()
     if request.method == "POST":
-        # Handle AJAX form submission
         if request.is_json:
             form_data = request.get_json()
-        else:
-            # Handle regular form submission
-            form_data = request.form.to_dict()
 
-        # Basic validation
-        required_fields = ["name", "email", "message"]
-        missing_fields = [
-            field for field in required_fields if not form_data.get(field)
-        ]
+            required_fields = ["name", "email", "message"]
+            missing_fields = [
+                field for field in required_fields if not form_data.get(field)
+            ]
 
-        if missing_fields:
-            if request.is_json:
+            if missing_fields:
                 return (
                     jsonify(
                         {
                             "success": False,
-                            "message": (
-                                f"Missing required fields: "
-                                f'{", ".join(missing_fields)}'
-                            ),
+                            "message": f"Missing required fields: {', '.join(missing_fields)}",
                         }
                     ),
                     400,
                 )
-            else:
-                flash("Please fill in all required fields.", "error")
-                return redirect(url_for("main.contact"))
 
-        # Validate email format (basic)
-        email = form_data.get("email", "")
-        if "@" not in email or "." not in email:
-            if request.is_json:
+            email = form_data.get("email", "")
+            if "@" not in email or "." not in email:
                 return (
                     jsonify(
                         {
@@ -138,60 +126,50 @@ def contact():
                     ),
                     400,
                 )
-            else:
-                flash("Please enter a valid email address.", "error")
-                return redirect(url_for("main.contact"))
 
-        # Try to send email
-        email_sent = send_contact_email(form_data)
+            email_sent = send_contact_email(form_data)
 
-        if email_sent:
-            if request.is_json:
+            if email_sent:
                 return jsonify(
                     {
                         "success": True,
-                        "message": (
-                            "Thank you for your message! "
-                            "I will get back to you soon."
-                        ),
+                        "message": "Thank you for your message! I will get back to you soon.",
                     }
                 )
-            else:
+            return (
+                jsonify(
+                    {
+                        "success": False,
+                        "message": "Sorry, there was an error sending your message. Please try again or contact me directly.",
+                    }
+                ),
+                500,
+            )
+
+        if form.validate_on_submit():
+            form_data = {k: v for k, v in form.data.items() if k != "csrf_token"}
+            email_sent = send_contact_email(form_data)
+            if email_sent:
                 flash(
                     "Thank you for your message! I will get back to you soon.",
                     "success",
                 )
-                return redirect(url_for("main.contact"))
-        else:
-            if request.is_json:
-                return (
-                    jsonify(
-                        {
-                            "success": False,
-                            "message": (
-                                "Sorry, there was an error sending your message. "
-                                "Please try again or contact me directly."
-                            ),
-                        }
-                    ),
-                    500,
-                )
             else:
                 flash(
-                    (
-                        "Sorry, there was an error sending your message. "
-                        "Please try again or contact me directly."
-                    ),
+                    "Sorry, there was an error sending your message. Please try again or contact me directly.",
                     "error",
                 )
-                return redirect(url_for("main.contact"))
+            return redirect(url_for("main.contact"))
 
-    # GET request - show contact form
+        flash("Please fill in all required fields.", "error")
+        return redirect(url_for("main.contact"))
+
     seo_data = get_page_seo_data("contact")
     return render_template(
         "contact.html",
         title="Contact Jake Crossman - Professional Actor Representation",
         seo_data=seo_data,
+        form=form,
     )
 
 

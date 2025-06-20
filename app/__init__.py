@@ -1,6 +1,9 @@
 from flask import Flask
+from flask_wtf import CSRFProtect
 import os
 from dotenv import load_dotenv
+
+csrf = CSRFProtect()
 
 
 def create_app(config_name="default"):
@@ -10,6 +13,7 @@ def create_app(config_name="default"):
 
     app = Flask(__name__)  # Load configuration from environment variables
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "fallback-secret-key")
+    csrf.init_app(app)
     app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
     app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024
 
