@@ -15,7 +15,13 @@ A Flask-based portfolio website for showcasing theatrical work and performances.
    pip install -r requirements.txt
    ```
 
-3. Run the application:
+3. Create a `.env` file:
+   ```bash
+   cp .env.example .env
+   # then edit .env to add your configuration
+   ```
+
+4. Run the application:
    ```bash
    python3.12 app.py
    ```
