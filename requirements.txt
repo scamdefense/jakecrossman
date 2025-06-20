@@ -8,6 +8,7 @@ mypy==1.10.0
 python-dotenv==1.1.0
 Pillow==11.2.1
 Flask-WTF==1.2.2
+Flask-Caching==2.1.0
 requests==2.32.4
 beautifulsoup4==4.13.4
 lxml==5.4.0

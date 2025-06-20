@@ -1,5 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_wtf import CSRFProtect
+from flask_caching import Cache
 import os
 from dotenv import load_dotenv
 
@@ -7,13 +8,18 @@ from dotenv import load_dotenv
 load_dotenv()
 
 csrf = CSRFProtect()
+cache = Cache()
 
 
 class BaseConfig:
     """Base configuration with common settings."""
 
     SECRET_KEY = os.getenv("SECRET_KEY", "fallback-secret-key")
-    SEND_FILE_MAX_AGE_DEFAULT = 0
+    ENABLE_CACHE_HEADERS = os.getenv("ENABLE_CACHE_HEADERS", "True") == "True"
+    STATIC_CACHE_TIMEOUT = int(os.getenv("STATIC_CACHE_TIMEOUT", 3600))
+    SEND_FILE_MAX_AGE_DEFAULT = STATIC_CACHE_TIMEOUT if ENABLE_CACHE_HEADERS else 0
+    CACHE_TYPE = os.getenv("CACHE_TYPE", "SimpleCache")
+    CACHE_DEFAULT_TIMEOUT = int(os.getenv("CACHE_DEFAULT_TIMEOUT", 300))
     MAX_CONTENT_LENGTH = 100 * 1024 * 1024
 
     # Email Configuration
@@ -72,6 +78,7 @@ def create_app(config_name="development"):
     config_class = config_map.get(config_name, DevelopmentConfig)
     app.config.from_object(config_class)
     csrf.init_app(app)
+    cache.init_app(app)
 
     # Register blueprints
     from app.main import bp as main_bp
@@ -82,5 +89,15 @@ def create_app(config_name="development"):
     def page_not_found(error):
         """Render custom 404 page."""
         return render_template("404.html"), 404
+
+    @app.after_request
+    def add_static_cache_headers(response):
+        """Add Cache-Control headers for static files if enabled."""
+        if app.config.get("ENABLE_CACHE_HEADERS") and request.path.startswith(
+            "/static"
+        ):
+            max_age = app.config.get("STATIC_CACHE_TIMEOUT", 3600)
+            response.headers["Cache-Control"] = f"public, max-age={max_age}"
+        return response
 
     return app
