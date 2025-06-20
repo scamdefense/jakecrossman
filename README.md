@@ -17,7 +17,7 @@ A Flask-based portfolio website for showcasing theatrical work and performances.
 
 3. Run the application:
    ```bash
-   python3.12 app.py
+   python3.12 wsgi.py
    ```
 
 ## Dependencies
