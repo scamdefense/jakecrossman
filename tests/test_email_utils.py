@@ -1,4 +1,3 @@
-import pytest
 from app.email_utils import create_email_body
 
 
