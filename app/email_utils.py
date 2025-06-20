@@ -1,7 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from flask import current_app
+from flask import current_app, render_template
 import logging
 
 logger = logging.getLogger(__name__)
@@ -54,21 +54,13 @@ def create_email_body(form_data):
     message = form_data.get("message", "Not provided")
     resume_attach = form_data.get("resume_attach", False)
 
-    professional_materials = (
-        '<p><strong>Professional Materials Package Requested:</strong> "Yes"</p>'
-        if resume_attach
-        else ""
+    return render_template(
+        "email/contact_email.html",
+        name=name,
+        email=email,
+        production=production,
+        role=role,
+        timeline=timeline,
+        message=message,
+        resume_attach=resume_attach,
     )
-
-    html_body = f"""
-    <h2>New Contact Form Submission</h2>
-    <p><strong>Name:</strong> {name}</p>
-    <p><strong>Email:</strong> {email}</p>
-    <p><strong>Production/Project:</strong> {production}</p>
-    <p><strong>Role/Opportunity:</strong> {role}</p>
-    <p><strong>Timeline:</strong> {timeline}</p>
-    <p><strong>Message:</strong> {message}</p>
-    {professional_materials}
-    """
-
-    return html_body
