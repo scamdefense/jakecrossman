@@ -20,6 +20,24 @@ A Flask-based portfolio website for showcasing theatrical work and performances.
    python3.12 app.py
    ```
 
+## Configuration
+
+`create_app` accepts a configuration profile name:
+
+- `development`
+- `testing`
+- `production`
+
+Call the factory with the desired profile:
+
+```python
+from app import create_app
+
+app = create_app("production")
+```
+
+Without an argument, the development configuration is used.
+
 ## Dependencies
 
 The project relies on the following Python packages for HTTP requests and HTML parsing:
