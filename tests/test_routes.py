@@ -103,6 +103,20 @@ def test_news_sitemap_xml(client):
     assert response.headers["Content-Type"].startswith("application/xml")
 
 
+def test_gallery_page_dynamic(client):
+    """Gallery page should include loaded markdown title."""
+    response = client.get("/gallery")
+    assert response.status_code == 200
+    assert b"Professional Headshot 1" in response.data
+
+
+def test_news_page_dynamic(client):
+    """News page should include loaded markdown entry."""
+    response = client.get("/news")
+    assert response.status_code == 200
+    assert b"Cardistry Consultant on F1 The Movie" in response.data
+
+
 def test_image_sitemap_xml(client):
     """Ensure the image sitemap endpoint returns XML."""
     response = client.get("/image-sitemap.xml")

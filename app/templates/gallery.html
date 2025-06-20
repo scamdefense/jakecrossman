@@ -15,16 +15,11 @@
     <div class="container">
         <h2 style="color: #ffd700; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem;">
             <i class="fas fa-camera-retro"></i> Professional Headshots
-        </h2>          <div class="gallery-grid">
-            <!-- Professional Headshots -->
-            {{ gallery_image('headshot-1', 'Jake Crossman Professional Headshot 1') }}
-            {{ gallery_image('headshot-2', 'Jake Crossman Professional Headshot 2') }}
-            {{ gallery_image('headshot-3', 'Jake Crossman Professional Headshot 3') }}
-            {{ gallery_image('headshot-4', 'Jake Crossman Professional Headshot 4') }}
-            {{ gallery_image('headshot-5', 'Jake Crossman Professional Headshot 5') }}
-            {{ gallery_image('headshot-6', 'Jake Crossman Professional Headshot 6') }}
-            {{ gallery_image('headshot-7', 'Jake Crossman Professional Headshot 7') }}
-            {{ gallery_image('headshot-8', 'Jake Crossman Professional Headshot 8') }}
+        </h2>
+        <div class="gallery-grid">
+            {% for entry in entries %}
+            {{ gallery_image(entry.image, entry.title) }}
+            {% endfor %}
         </div>
     </div>
 </section>

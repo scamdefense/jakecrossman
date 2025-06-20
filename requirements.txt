@@ -10,3 +10,4 @@ Flask-WTF==1.2.2
 requests==2.32.4
 beautifulsoup4==4.13.4
 lxml==5.4.0
+Markdown==3.6
