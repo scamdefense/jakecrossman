@@ -1,4 +1,3 @@
-import pytest
 from app.email_utils import create_email_body
 
 
@@ -28,4 +27,4 @@ def test_create_email_body_without_resume():
         "resume_attach": False,
     }
     body = create_email_body(data)
-    assert 'Professional Materials Package Requested' not in body
+    assert "Professional Materials Package Requested" not in body
