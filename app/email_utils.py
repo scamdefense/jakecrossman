@@ -2,12 +2,51 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from flask import current_app, render_template
+from concurrent.futures import ThreadPoolExecutor
 import logging
 
 logger = logging.getLogger(__name__)
 
+# ThreadPoolExecutor to offload SMTP calls
+executor = ThreadPoolExecutor(max_workers=2)
+
+
+def _send_email_task(
+    form_data,
+    smtp_server,
+    smtp_port,
+    username,
+    password,
+    from_email,
+    to_email,
+):
+    """Send the email synchronously. Intended to run in a worker thread."""
+    try:
+        msg = MIMEMultipart()
+        msg["From"] = from_email
+        msg["To"] = to_email
+        msg["Subject"] = (
+            f"New Contact Form Submission from {form_data.get('name', 'Unknown')}"
+        )
+
+        body = create_email_body(form_data)
+        msg.attach(MIMEText(body, "html"))
+
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(username, password)
+            server.send_message(msg)
+
+        logger.info(
+            "Contact email sent successfully from %s",
+            form_data.get("email", "unknown"),
+        )
+    except Exception as exc:  # pragma: no cover - log unexpected exceptions
+        logger.error("Failed to send contact email: %s", exc)
+
 
 def send_contact_email(form_data):
+    """Schedule contact email sending in a background thread."""
     try:
         smtp_server = current_app.config.get("SMTP_SERVER")
         smtp_port = current_app.config.get("SMTP_PORT")
@@ -20,28 +59,22 @@ def send_contact_email(form_data):
             logger.error("Missing email configuration")
             return False
 
-        msg = MIMEMultipart()
-        msg["From"] = from_email
-        msg["To"] = to_email
-        msg[
-            "Subject"
-        ] = f"New Contact Form Submission from {form_data.get('name', 'Unknown')}"
-
-        body = create_email_body(form_data)
-        msg.attach(MIMEText(body, "html"))
-
-        with smtplib.SMTP(smtp_server, smtp_port) as server:
-            server.starttls()
-            server.login(username, password)
-            server.send_message(msg)
-
-        logger.info(
-            f"Contact email sent successfully from {form_data.get('email', 'unknown')}"
+        # Offload the SMTP call to a worker thread
+        executor.submit(
+            _send_email_task,
+            form_data,
+            smtp_server,
+            smtp_port,
+            username,
+            password,
+            from_email,
+            to_email,
         )
+
         return True
 
-    except Exception as e:
-        logger.error(f"Failed to send contact email: {str(e)}")
+    except Exception as exc:
+        logger.error("Failed to schedule contact email: %s", exc)
         return False
 
 
