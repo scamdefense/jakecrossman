@@ -59,6 +59,17 @@ The project relies on the following Python packages for HTTP requests and HTML p
 - Lint code: `flake8 .`
 - Install pre-commit hooks: `pre-commit install`
 
+## SEO Testing
+
+Run the automated SEO tester against a running instance:
+
+```bash
+python seo_tester.py --url http://localhost:5000 --json-output results.json
+```
+
+This writes the raw results to `results.json`. Use `--page PATH` to test a
+single page.
+
 ## Docker
 
 Build and run with Docker:
