@@ -67,6 +67,22 @@ docker build -t actor-portfolio .
 docker run -p 5000:5000 actor-portfolio
 ```
 
+### Docker Compose
+
+For a production-style deployment using Nginx as a reverse proxy, you can use
+`docker-compose`:
+
+```bash
+# Copy environment variables
+cp .env.example .env
+
+# Build and start the services
+docker-compose up --build
+```
+
+The application will be available on port `80` and static files are served
+directly by Nginx.
+
 ## Citation
 
 To cite this project, please use the metadata provided in [CITATION.cff](CITATION.cff).
